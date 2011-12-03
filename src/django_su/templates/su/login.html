@@ -4,6 +4,12 @@
 
 {% block extrahead %}
     {{ block.super }}
+    {% if form.need_jquery %}
+        {% include "su/media.libraries.html" %}
+        <script type="text/javascript" src="{{ MEDIA_URL }}ajax_selects/js/ajax_select.js"></script>
+        <link href="{{ MEDIA_URL }}ajax_selects/css/ajax_select.css" rel="stylesheet" type="text/css" href="style.css" media="all" />
+    {% endif %}
+    {{ form.media }}
     <link href="{% admin_media_prefix %}css/forms.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
