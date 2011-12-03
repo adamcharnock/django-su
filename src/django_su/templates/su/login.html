@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n adminmedia %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% admin_media_prefix %}css/forms.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+    <form action="." method="POST">
+        {{ form }}
+        <div class="submit-row">
+            <input type="submit" name="submit" class="default" value="{% trans "Change Login" %}"/>
+        </div>
+    </form>
+{% endblock %}
