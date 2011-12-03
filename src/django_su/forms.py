@@ -14,14 +14,15 @@ class UserSuForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UserSuForm, self).__init__(*args, **kwargs)
         self.need_jquery = False
-        if 'ajax_select' in settings.INSTALLED_APPS and getattr(settings, 'AJAX_LOOKUP_CHANNELS'):
+        if 'ajax_select' in settings.INSTALLED_APPS and \
+            getattr(settings, 'AJAX_LOOKUP_CHANNELS', None):
             django_su_lookup = settings.AJAX_LOOKUP_CHANNELS.get('django_su', )
             if django_su_lookup:
                 from ajax_select.fields import AutoCompleteSelectField
                 old_field = self.fields['user']
                 self.fields['user'] = AutoCompleteSelectField('django_su',
-                                                              required=old_field.required,
-                                                              label=old_field.label)
+                                            required=old_field.required,
+                                            label=old_field.label)
                 self.need_jquery = True
 
     def get_user(self):
