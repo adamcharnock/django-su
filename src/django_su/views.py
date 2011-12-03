@@ -13,7 +13,7 @@ def login_as_user(request, user_id):
     su_user.backend = settings.AUTHENTICATION_BACKENDS[0]
     login(request, su_user)
     request.session["exit_user_pk"] = exit_user_pk
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_LOGIN", "/"))
 
 
 def su_exit(request):
@@ -24,4 +24,4 @@ def su_exit(request):
     staff_user = User.objects.get(pk=exit_user_pk)
     staff_user.backend = settings.AUTHENTICATION_BACKENDS[0]
     login(request, staff_user)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_EXIT", "/"))
