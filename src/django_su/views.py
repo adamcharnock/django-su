@@ -15,8 +15,10 @@ def login_as_user(request, user_id):
     su_user = get_object_or_404(User, pk=user_id)
     exit_user_pk = request.user.pk
     su_user.backend = settings.AUTHENTICATION_BACKENDS[0]
+    exit_users_pk = request.session.get("exit_users_pk", default=[])
+    exit_users_pk.append(exit_user_pk)
     login(request, su_user)
-    request.session["exit_user_pk"] = exit_user_pk
+    request.session["exit_users_pk"] = exit_users_pk
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_LOGIN", "/"))
 
 
@@ -35,11 +37,12 @@ def su_login(request, user_form=UserSuForm):
 
 
 def su_exit(request):
-    exit_user_pk = request.session.get("exit_user_pk", default=None)
-    if not exit_user_pk:
+    exit_users_pk = request.session.get("exit_users_pk", default=[])
+    if not exit_users_pk:
         return HttpResponseBadRequest(("This session was not su'ed into."
                                        "Cannot exit."))
-    staff_user = User.objects.get(pk=exit_user_pk)
+    staff_user = User.objects.get(pk=exit_users_pk[-1])
     staff_user.backend = settings.AUTHENTICATION_BACKENDS[0]
     login(request, staff_user)
+    request.session["exit_users_pk"] = exit_users_pk[:-1]
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_EXIT", "/"))
