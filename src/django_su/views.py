@@ -21,7 +21,7 @@ def login_as_user(request, user_id):
 
 
 @user_passes_test(can_su_login)
-def login_as_user_form(request, user_form=UserSuForm):
+def su_login(request, user_form=UserSuForm):
     data = None
     if request.method == 'POST':
         data = request.POST
