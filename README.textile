@@ -23,6 +23,13 @@ If yout install django-ajax-selects also add this in your settings
 
 <code>AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}</code>
 
+h2. Step 4: Customize django_su (optional)
+
+In your settings you can configure:
+
+ * SU_REDIRECT_LOGIN: URL to redirect after the login. By default is "/"
+ * SU_REDIRECT_EXIT: URL to redirect after the logout. By default is "/"
+ * SU_LOGIN: A function to specify the perms that the user must have can use django_su
 
 h2. Usage
 
