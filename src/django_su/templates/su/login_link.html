@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% if can_su_login %}
+    <ul class="object-tools">
+        <li><a href="{% url su_login %}">{% trans "Login as other user" %}</a></li>
+    </ul>
+{% endif %}
