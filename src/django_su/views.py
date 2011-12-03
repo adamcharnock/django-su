@@ -1,10 +1,9 @@
-
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.conf import settings
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import login
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 
 @user_passes_test(lambda u: u.is_staff)
