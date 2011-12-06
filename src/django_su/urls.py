@@ -1,8 +1,8 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, url
 
-from django_su.views import login_as_user, su_exit
 
-urlpatterns = patterns("",
-    url(r"^su/(?P<user_id>[\d]+)/$", login_as_user, name="login_as_user"),
-    url(r"^su/$", su_exit, name="su_exit"),
+urlpatterns = patterns("django_su.views",
+    url(r"^$", "su_exit", name="su_exit"),
+    url(r"^login/$", "su_login", name="su_login"),
+    url(r"^(?P<user_id>[\d]+)/$", "login_as_user", name="login_as_user"),
 )

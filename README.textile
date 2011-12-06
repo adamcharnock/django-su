@@ -8,9 +8,28 @@ h2. Step 2: urls.py
 
 Add this to your root @urls.py@ file:
 
-<code>url(r"^", include("django_su.urls")),</code>
+<code>url(r"^su/", include("django_su.urls")),</code>
 
 And that should be it!
+
+h2. Step 3: Install other eggs (optional, but recommended)
+
+If you install these two eggs the enhance user experience:
+
+ * "The form of 'login su' will rendered link a admin form":http://pypi.python.org/pypi/django-form-admin
+ * "The widget to choose the users in the form of 'login su' will be a autocomplete":http://pypi.python.org/pypi/django-ajax-selects 
+
+If yout install django-ajax-selects also add this in your settings
+
+<code>AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}</code>
+
+h2. Step 4: Customize django_su (optional)
+
+In your settings you can configure:
+
+ * SU_REDIRECT_LOGIN: URL to redirect after the login. By default is "/"
+ * SU_REDIRECT_EXIT: URL to redirect after the logout. By default is "/"
+ * SU_LOGIN: A function to specify the perms that the user must have can use django_su
 
 h2. Usage
 
