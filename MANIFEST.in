@@ -1,0 +1,5 @@
+include README.textile
+include *.py
+recursive-include src/django_su *.py
+recursive-include src/django_su/templatetags *.py
+recursive-include src/django_su/templates *
