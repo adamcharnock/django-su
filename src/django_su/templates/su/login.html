@@ -19,6 +19,7 @@
 
 {% block content %}
     <form action="." method="POST">
+        {% csrf_token %}
         {{ form }}
         <div class="submit-row">
             <input type="submit" name="submit" class="default" value="{% trans "Change Login" %}"/>
