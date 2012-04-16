@@ -17,3 +17,11 @@ def can_su_login(user):
     if su_login:
         return import_function(su_login)(user)
     return user.has_perm('auth.change_user')
+
+
+def get_static_url():
+    static_url = getattr(settings, 'STATIC_URL', None)
+    if static_url:
+        return static_url
+    else:  # To old django versions
+        return '%sajax_select/' % getattr(settings, 'MEDIA_URL', None)
