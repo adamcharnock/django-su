@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from django_su.forms import UserSuForm
-from django_su.utils import can_su_login
+from django_su.utils import can_su_login, get_static_url
 
 
 @user_passes_test(can_su_login)
@@ -32,7 +32,8 @@ def su_login(request, user_form=UserSuForm):
         user = form.get_user()
         return login_as_user(request, user.pk)
     return render_to_response('su/login.html',
-                              {'form': form},
+                              {'form': form,
+                               'STATIC_URL': get_static_url()},
                               context_instance=RequestContext(request))
 
 
