@@ -1,5 +1,7 @@
 from django.conf import settings
 
+import inspect
+
 
 def import_function(name, package=None):
     path = name.split('.')
@@ -12,10 +14,20 @@ def import_function(name, package=None):
     return getattr(module, path[-1])
 
 
-def can_su_login(user):
+def can_su_login(user, su_user=None):
+    """
+    Returns True iff user can change into su_user, or - if su_user is
+    None - iff the user can change users at all (for template usage).
+    """
     su_login = getattr(settings, 'SU_LOGIN', None)
     if su_login:
-        return import_function(su_login)(user)
+        func = import_function(su_login)
+        # Pass the function just one argument if that's all
+        # it takes, to maintain backward compatibility
+        if len(inspect.getargspec(func)[0]) == 1:
+            return func(user)
+        else:
+            return func(user, su_user)
     return user.has_perm('auth.change_user')
 
 

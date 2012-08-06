@@ -29,7 +29,9 @@ In your settings you can configure:
 
  * SU_REDIRECT_LOGIN: URL to redirect after the login. By default is "/"
  * SU_REDIRECT_EXIT: URL to redirect after the logout. By default is "/"
- * SU_LOGIN: A function to specify the perms that the user must have can use django_su
+ * SU_LOGIN: The name of a function that returns True if the supplied user can change users
+
+If the SU_LOGIN function takes two arguments, it will be passed a second, which will either be the target user, or None if this is not known at the time of calling (eg from templates showing the button).
 
 h2. Usage
 
