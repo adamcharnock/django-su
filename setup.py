@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
     name='django-su',
-    version="0.2",
+    version="0.3",
     description="Login as any user from the Django admin interface, then switch back when done",
     author="Adam Charnock",
     author_email="adam@continuous.io",
