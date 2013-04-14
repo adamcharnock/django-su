@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
+from django.contrib.auth.views import logout_then_login
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -47,3 +48,10 @@ def su_exit(request):
     login(request, staff_user)
     request.session["exit_users_pk"] = exit_users_pk[:-1]
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_EXIT", "/"))
+
+
+def su_logout(request):
+    exit_users_pk = request.session.get("exit_users_pk", default=[])
+    if exit_users_pk and su_exit:
+        return su_exit(request)
+    return logout_then_login(request)
