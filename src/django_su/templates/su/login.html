@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}
 
-{% load i18n staticfiles %}
+{% load i18n adminmedia %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -10,7 +10,7 @@
         <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" href="style.css" media="all" />
     {% endif %}
     {{ form.media }}
-    <link href="{% static 'admin/css/forms.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% admin_media_prefix %}css/forms.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 
