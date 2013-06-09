@@ -15,7 +15,9 @@ def import_function(name, package=None):
 def can_su_login(user):
     su_login = getattr(settings, 'SU_LOGIN', None)
     if su_login:
-        return import_function(su_login)(user)
+        if not callable(su_login):
+            su_login = import_function(su_login)
+        return su_login(user)
     return user.has_perm('auth.change_user')
 
 
