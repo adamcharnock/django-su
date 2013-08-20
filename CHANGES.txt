@@ -1,5 +1,12 @@
 ----
 
+Version 0.3.1, Tue 20 Aug 2013
+===============================
+
+81e27c1c0f	Adding long_description to setup.py (Adam Charnock)
+3afc8fbcfb	Updating readme (Adam Charnock)
+
+
 Version 0.3.0, Tue 20 Aug 2013
 ===============================
 
