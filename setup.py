@@ -9,6 +9,7 @@ setup(
     name='django-su',
     version=__version__,
     description="Login as any user from the Django admin interface, then switch back when done",
+    long_description=open('README.rst').read() if os.path.exists("README.rst") else "",
     author="Adam Charnock",
     author_email="adam@adamcharnock.com",
     url="https://github.com/adamcharnock/django-su",
