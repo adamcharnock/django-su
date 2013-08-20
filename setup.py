@@ -1,15 +1,18 @@
-from distutils.core import setup
-from setuptools import find_packages
+import os.path
+import sys
+from setuptools import setup, find_packages
 
+sys.path += [os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')]
+from django_su import __version__
 
 setup(
     name='django-su',
-    version="0.2",
+    version=__version__,
     description="Login as any user from the Django admin interface, then switch back when done",
     author="Adam Charnock",
-    author_email="adam@continuous.io",
-    url="https://github.com/continuous/django-su",
-    license="Apache Software License",
+    author_email="adam@adamcharnock.com",
+    url="https://github.com/adamcharnock/django-su",
+    license="MIT",
 
     install_requires=["django"],
 
