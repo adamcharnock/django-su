@@ -1,5 +1,11 @@
 ----
 
+Version 0.3.2, Wed 21 Aug 2013
+===============================
+
+3021ad7e73	Minor readme updates (Adam Charnock)
+
+
 Version 0.3.1, Tue 20 Aug 2013
 ===============================
 

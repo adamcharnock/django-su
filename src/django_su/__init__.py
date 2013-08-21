@@ -3,4 +3,4 @@ import os
 # The fake password we will use to authenticate su'ed users
 SECRET_PASSWORD = os.urandom(64)
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
