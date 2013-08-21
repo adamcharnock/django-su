@@ -1,3 +1,9 @@
+.. image:: https://badge.fury.io/py/django-su.png
+    :target: https://badge.fury.io/py/django-su
+
+.. image:: https://pypip.in/d/django-su/badge.png
+    :target: https://pypi.python.org/pypi/django-su
+
 Installation
 ============
 
@@ -51,6 +57,8 @@ This app was put together by Adam Charnock, but was largely based on ideas, code
 * http://bitkickers.blogspot.com/2010/06/add-button-to-django-admin-to-login-as.html
 * http://copiousfreetime.blogspot.com/2006/12/django-su.html
 
+django-su is packaged using seed_.
 
 .. _django admin forms: http://pypi.python.org/pypi/django-form-admin
 .. _django ajax selects: http://pypi.python.org/pypi/django-ajax-selects
+.. _seed: https://github.com/adamcharnock/seed/
