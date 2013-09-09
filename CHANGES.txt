@@ -1,5 +1,11 @@
 ----
 
+Version 0.4.0, Mon 09 Sep 2013
+===============================
+
+65a365df3c	Remove deprecated adminmedia usage (Anthony Garcia)
+
+
 Version 0.3.2, Wed 21 Aug 2013
 ===============================
 
