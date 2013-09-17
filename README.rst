@@ -12,6 +12,16 @@ Step 1: Settings
 
 Add ``django_su`` to ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``.
 
+Next add the ``django-su`` authentication backend::
+
+    AUTHENTICATION_BACKENDS = (
+        # Standard Django auth
+        "django.contrib.auth.backends.ModelBackend",
+        # django-su auth
+        "django_su.backends.SuBackend",
+    )
+
+
 Step 2: urls.py
 ---------------
 
