@@ -1,5 +1,14 @@
 ----
 
+Version 0.4.1, Fri 20 Dec 2013
+===============================
+
+177d5cb7ed	Fixed import error for django 1.6 (Wes Okes)
+606009c1b9	Update README.rst (Adam Charnock)
+43d447ee58	Re-adding incorrectly removing changelog (Adam Charnock)
+1fc7cb5dda	Removing old changelog (Adam Charnock)
+
+
 Version 0.4.0, Mon 09 Sep 2013
 ===============================
 
