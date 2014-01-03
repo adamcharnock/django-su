@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
-  <ul class="object-tools">
+  <ul class="object-tools grp-object-tools">
     <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
     <li><a href="{% url 'login_as_user' object_id %}" class="su">{% trans "Login as" %}</a></li>
     {% if has_absolute_url %}
