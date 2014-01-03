@@ -1,5 +1,12 @@
 ----
 
+Version 0.4.2, Fri 03 Jan 2014
+===============================
+
+c9ffb78d8a	Fixed #23 object tools only show up for user and not group pages
+    Added class for django-grappelli support (won't harm vanilla admin) (David Burke)
+
+
 Version 0.4.1, Fri 20 Dec 2013
 ===============================
 
