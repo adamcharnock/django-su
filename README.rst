@@ -51,6 +51,7 @@ In your settings you can configure:
  * ``SU_REDIRECT_LOGIN``: URL to redirect after the login. By default is "/"
  * ``SU_REDIRECT_EXIT``: URL to redirect after the logout. By default is "/"
  * ``SU_LOGIN``: A function to specify the perms that the user must have can use django_su
+ * ``SU_CUSTOM_LOGIN_ACTION``: A function to override the django.contrib.auth.login(request, user) function so you can set session data, etc.
 
 Usage
 -----
