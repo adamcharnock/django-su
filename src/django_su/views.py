@@ -57,6 +57,7 @@ def su_exit(request):
                                        "Cannot exit."))
     staff_user = User.objects.get(pk=exit_users_pk[-1][0])
     staff_user.backend = exit_users_pk[-1][1]
-    login(request, staff_user)
+    if not custom_login_action(request, staff_user):
+        login(request, staff_user)
     request.session["exit_users_pk"] = exit_users_pk[:-1]
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_EXIT", "/"))
