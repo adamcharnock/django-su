@@ -1,5 +1,11 @@
 ----
 
+Version 0.4.3, Sat 24 May 2014
+===============================
+
+30fe67b924	Fix login_link template on django 1.4 (Iacopo Spalletti)
+
+
 Version 0.4.2, Fri 03 Jan 2014
 ===============================
 
