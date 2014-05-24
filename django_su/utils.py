@@ -21,6 +21,16 @@ def can_su_login(user):
     return user.has_perm('auth.change_user')
 
 
+def custom_login_action(request, su_user):
+    custom_login_action = getattr(settings, 'SU_CUSTOM_LOGIN_ACTION', None)
+    if custom_login_action:
+        if not callable(custom_login_action):
+            custom_login_action = import_function(custom_login_action)
+        custom_login_action(request, su_user)
+        return True
+    return False
+
+
 def get_static_url():
     static_url = getattr(settings, 'STATIC_URL', None)
     if static_url:
