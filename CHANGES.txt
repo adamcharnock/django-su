@@ -1,5 +1,12 @@
 ----
 
+Version 0.4.5, Sat 24 May 2014
+===============================
+
+186aa20be4	missed the su_exit for the auth.login override (Clay Johns)
+f700cf1a19	added the ability to override the auth.login function (Clay Johns)
+
+
 Version 0.4.4, Sat 24 May 2014
 ===============================
 
