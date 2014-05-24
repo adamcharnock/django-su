@@ -1,5 +1,12 @@
 ----
 
+Version 0.4.4, Sat 24 May 2014
+===============================
+
+e9564130db	Further cleanup of src directory usage (Adam Charnock)
+c0022f363b	Moving django_su into top level directory (Adam Charnock)
+
+
 Version 0.4.3, Sat 24 May 2014
 ===============================
 
