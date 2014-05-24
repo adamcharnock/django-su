@@ -2,3 +2,5 @@
 ._*
 *.egg-info
 /dist
+/.idea
+/build
