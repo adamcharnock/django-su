@@ -14,21 +14,23 @@ from django.http import Http404
 from django.template import RequestContext
 
 from django_su.forms import UserSuForm
-from django_su.utils import can_su_login, get_static_url
+from django_su.utils import can_su_login, get_static_url, custom_login_action
 
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 
+
 @user_passes_test(can_su_login)
 def login_as_user(request, user_id):
-    su_user = authenticate(su=True,pk=user_id)
+    su_user = authenticate(su=True, pk=user_id)
 
     if not su_user:
         raise Http404("User not found")
 
-    exit_user_pk = (request.session[SESSION_KEY],request.session[BACKEND_SESSION_KEY])
+    exit_user_pk = (request.session[SESSION_KEY], request.session[BACKEND_SESSION_KEY])
     exit_users_pk = request.session.get("exit_users_pk", default=[])
     exit_users_pk.append(exit_user_pk)
-    login(request, su_user)
+    if not custom_login_action(request, su_user):
+        login(request, su_user)
     request.session["exit_users_pk"] = exit_users_pk
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_LOGIN", "/"))
 
@@ -55,6 +57,7 @@ def su_exit(request):
                                        "Cannot exit."))
     staff_user = User.objects.get(pk=exit_users_pk[-1][0])
     staff_user.backend = exit_users_pk[-1][1]
-    login(request, staff_user)
+    if not custom_login_action(request, staff_user):
+        login(request, staff_user)
     request.session["exit_users_pk"] = exit_users_pk[:-1]
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_EXIT", "/"))
