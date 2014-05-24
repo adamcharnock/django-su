@@ -1,10 +1,7 @@
 import os.path
 import sys
-
 from setuptools import setup, find_packages
 
-
-sys.path += [os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')]
 from django_su import __version__
 
 setup(
