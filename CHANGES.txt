@@ -1,5 +1,11 @@
 ----
 
+Version 0.4.7, Wed 09 Jul 2014
+===============================
+
+571f2aac86	Fix for django 1.4 (Iacopo Spalletti)
+
+
 Version 0.4.6, Wed 09 Jul 2014
 ===============================
 
