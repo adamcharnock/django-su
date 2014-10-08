@@ -5,11 +5,13 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.views.decorators.http import require_http_methods
 
 from django_su.forms import UserSuForm
 from django_su.utils import can_su_login, get_static_url
 
 
+@require_http_methods(['POST'])
 @user_passes_test(can_su_login)
 def login_as_user(request, user_id):
     su_user = get_object_or_404(User, pk=user_id)
@@ -22,6 +24,7 @@ def login_as_user(request, user_id):
     return HttpResponseRedirect(getattr(settings, "SU_REDIRECT_LOGIN", "/"))
 
 
+@require_http_methods(['POST'])
 @user_passes_test(can_su_login)
 def su_login(request, user_form=UserSuForm):
     data = None
