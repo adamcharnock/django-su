@@ -15,31 +15,47 @@ Authored by `Adam Charnock <http://https://adamcharnock.com/>`_, and some great 
     :target: https://pypi.python.org/pypi/django-su/
 
 Installation
-============
+------------
 
-Step 1: Settings
-----------------
+1. Either checkout ``django_su`` from GitHub, or install using pip::
 
-Add ``django_su`` to ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``.
+.. code-block:: bash
 
-Next add the ``django-su`` authentication backend::
+    pip install django-su
 
-    AUTHENTICATION_BACKENDS = (
-        # Standard Django auth
-        "django.contrib.auth.backends.ModelBackend",
-        # django-su auth
-        "django_su.backends.SuBackend",
+2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``::
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'django_su',  # must be before ``django.contrib.admin``
+        'django.contrib.admin',
     )
 
+3. Be sure you have the ``django_su.backends.SuBackend`` authentication backend::
 
-Step 2: urls.py
----------------
+.. code-block:: python
 
-Add this to your root ``urls.py`` file::
+    AUTHENTICATION_BACKENDS = (
+        ...
+        'django_su.backends.SuBackend',
+    )
 
-    url(r"^su/", include("django_su.urls")),
+4. Update your ``urls.py`` file:
+
+.. code-block:: python
+
+    urlpatterns = patterns('',
+        url(r'^su/', include('django_su.urls')),
+        ...
+    )
 
 And that should be it!
+
+Please see ``example`` application. This application is used to manually test the functionalities of this package. This also serves as a good example.
+
+You need only Django 1.4 or above to run that. It might run on older versions but that is not tested.
 
 Step 3: Install other eggs (optional, but recommended)
 ------------------------------------------------------
@@ -66,12 +82,14 @@ In your settings you can configure:
 Usage
 -----
 
-Go and view a user in the admin interface and look for a new 'Login as' button in the top right.
+Go and view a user in the admin interface and look for a new 'Login
+as' button in the top right.
 
-Once you have su'ed into a user, you can get exit back into your original user by navigating to ``/su/`` in your browser.
+Once you have su'ed into a user, you can get exit back into your
+original user by navigating to ``/su/`` in your browser.
 
 Credits
-=======
+-------
 
 This app was put together by Adam Charnock, but was largely based on ideas, code and comments at:
 
