@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 try:
     from django.conf.urls import patterns, url
 except ImportError:  # django < 1.4

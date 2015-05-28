@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from django import template
 
-from django_su.utils import can_su_login
+from ..utils import can_su_login
+
 register = template.Library()
 
 
