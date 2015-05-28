@@ -17,13 +17,13 @@ Authored by `Adam Charnock <http://https://adamcharnock.com/>`_, and some great 
 Installation
 ------------
 
-1. Either checkout ``django_su`` from GitHub, or install using pip::
+1. Either checkout ``django_su`` from GitHub, or install using pip:
 
 .. code-block:: bash
 
     pip install django-su
 
-2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``::
+2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``:
 
 .. code-block:: python
 
@@ -33,7 +33,7 @@ Installation
         'django.contrib.admin',
     )
 
-3. Add ``SuBackend`` to ``AUTHENTICATION_BACKENDS``::
+3. Add ``SuBackend`` to ``AUTHENTICATION_BACKENDS``:
 
 .. code-block:: python
 
@@ -58,28 +58,29 @@ Please see ``example`` application. This application is used to manually test th
 You need only Django 1.4 or above to run that. It might run on older versions but that is not tested.
 
 External dependencies (optional, but recommended)
--------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you install these two eggs the enhance user experience:
 
 * The 'login su' form will render using `django admin forms`_
 * The user selection widget will render using `django ajax selects`_
 
-Note that `django ajax selects`_ requires the following settings::
+Note that `django ajax selects`_ requires the following settings:
 
 .. code-block:: python
 
-   AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
+    AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
 
+   
 Configuration (optional)
 ------------------------
 
-There are various optional configuration options you can set in your settings.py:
+There are various optional configuration options you can set in your settings.py::
 
-* ``SU_REDIRECT_LOGIN``: URL to redirect after the login. By default is "/"
-* ``SU_REDIRECT_EXIT``: URL to redirect after the logout. By default is "/"
-* ``SU_LOGIN``: A function to specify the perms that the user must have can use django_su
-* ``SU_CUSTOM_LOGIN_ACTION``: A function to override the django.contrib.auth.login(request, user) function so you can set session data, etc.
+``SU_REDIRECT_LOGIN``: URL to redirect after the login. By default is "/"
+``SU_REDIRECT_EXIT``: URL to redirect after the logout. By default is "/"
+``SU_LOGIN``: A function to specify the perms that the user must have can use django_su
+``SU_CUSTOM_LOGIN_ACTION``: A function to override the django.contrib.auth.login(request, user) function so you can set session data, etc.
 
 Usage
 -----
