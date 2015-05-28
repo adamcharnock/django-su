@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
+
+    'formadmin',
+    'ajax_select',
 ] + PROJECT_APPS
 
 
@@ -83,3 +86,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "django_su.backends.SuBackend",
 )
+
+AJAX_LOOKUP_CHANNELS = {
+    'django_su':  dict(model='auth.user', search_field='username'),
+}
