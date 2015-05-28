@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
 
-    'formadmin',
-    'ajax_select',
+    'formadmin',  # pip install django-form-admin
+    'ajax_select',  # pip install django-ajax-select
 ] + PROJECT_APPS
 
 
@@ -87,6 +87,7 @@ AUTHENTICATION_BACKENDS = (
     "django_su.backends.SuBackend",
 )
 
-AJAX_LOOKUP_CHANNELS = {
-    'django_su':  dict(model='auth.user', search_field='username'),
-}
+if 'ajax_select' in INSTALLED_APPS:
+    AJAX_LOOKUP_CHANNELS = {
+        'django_su':  dict(model='auth.user', search_field='username'),
+    }
