@@ -67,9 +67,7 @@ If you install these two eggs the enhance user experience:
 
 Note that `django ajax selects`_ requires the following settings::
 
-.. code-block:: python
-
-   AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
+    AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
 
 Configuration (optional)
 ------------------------
