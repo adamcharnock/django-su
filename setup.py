@@ -6,7 +6,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-from tz_detect import __version__
+from django_su import __version__
 
 setup(
     name='django-su',
