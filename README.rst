@@ -5,13 +5,13 @@ Login as any user from the Django admin interface, then switch back when done
 
 Authored by `Adam Charnock <http://https://adamcharnock.com/>`_, and some great `contributors <https://github.com/adamcharnock/django-su/contributors>`_.
 
-.. image:: https://pypip.in/version/django-su/badge.svg
+.. image:: https://img.shields.io/pypi/v/django-su.svg
     :target: https://pypi.python.org/pypi/django-su/
 
-.. image:: https://pypip.in/download/django-su/badge.svg
+.. image:: https://img.shields.io/pypi/dm/django-su.svg
     :target: https://pypi.python.org/pypi/django-su/
 
-.. image:: https://pypip.in/license/django-su/badge.svg
+.. image:: https://img.shields.io/github/license/adamcharnock/django-su.svg
     :target: https://pypi.python.org/pypi/django-su/
 
 Installation
