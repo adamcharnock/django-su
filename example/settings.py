@@ -81,11 +81,27 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "django_su.backends.SuBackend",
 )
+
+# URL to redirect after the login.
+# Default: "/"
+SU_LOGIN_REDIRECT_URL = "/" 
+
+# URL to redirect after the logout.
+# Default: "/"
+SU_LOGOUT_REDIRECT_URL = "/"
+
+# A function to specify the perms that the user must have can use django_su
+# Default: None
+SU_LOGIN_CALLBACK = "example.utils.su_login_callback"
+
+# A function to override the django.contrib.auth.login(request, user)
+# function so you can set session data, etc.
+# Default: None
+SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
 if 'ajax_select' in INSTALLED_APPS:
     AJAX_LOOKUP_CHANNELS = {
