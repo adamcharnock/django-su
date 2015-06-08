@@ -2,11 +2,10 @@
 
 from django import template
 
-from ..utils import can_su_login
+from ..utils import su_login_callback
 
 register = template.Library()
 
-
 @register.inclusion_tag('su/login_link.html', takes_context=True)
 def login_su_link(context, user):
-    return {'can_su_login': can_su_login(user)}
+    return {'can_su_login': su_login_callback(user)}
