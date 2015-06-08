@@ -32,6 +32,12 @@ TEMPLATE_DIRS = (
 
 # Application definition
 
+MIDDLEWARE_CLASSES = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+
 PROJECT_APPS = [
     'django_su',
     'django.contrib.admin',
