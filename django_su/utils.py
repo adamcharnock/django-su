@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import warnings
+import collections
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -20,7 +21,7 @@ def importpath(path, error_text=None):
     while parts:
         try:
             result = __import__('.'.join(parts), {}, {}, [''])
-        except ImportError, e:
+        except ImportError as e:
             if exception is None:
                 exception = e
             attrs = parts[-1:] + attrs
@@ -30,7 +31,7 @@ def importpath(path, error_text=None):
     for attr in attrs:
         try:
             result = getattr(result, attr)
-        except (AttributeError, ValueError), e:
+        except (AttributeError, ValueError) as e:
             if error_text is not None:
                 raise ImproperlyConfigured('Error: %s can import "%s"' % (
                     error_text, path))
@@ -45,7 +46,7 @@ def su_login_callback(user):
 
     func = getattr(settings, 'SU_LOGIN_CALLBACK', None)
     if func is not None:
-        if not callable(func):
+        if not isinstance(func, collections.Callable):
             func = importpath(func)
         return func(user)
     return user.has_perm('auth.change_user')
@@ -56,7 +57,7 @@ def custom_login_action(request, user):
     if func is None:
         return False
         
-    if not callable(func):
+    if not isinstance(func, collections.Callable):
         func = importpath(func)
     func(request, user)
 
