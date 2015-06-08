@@ -20,13 +20,13 @@ Authored by `Adam Charnock <http://https://adamcharnock.com/>`_, and some great 
 Installation
 ------------
 
-1. Either checkout ``django_su`` from GitHub, or install using pip:
+1. Either checkout ``django_su`` from GitHub, or install using ``pip`` :
 
 .. code-block:: bash
 
     pip install django-su
 
-2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin``:
+2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin`` :
 
 .. code-block:: python
 
@@ -36,7 +36,7 @@ Installation
         'django.contrib.admin',
     )
 
-3. Add ``SuBackend`` to ``AUTHENTICATION_BACKENDS``:
+3. Add ``SuBackend`` to ``AUTHENTICATION_BACKENDS`` :
 
 .. code-block:: python
 
@@ -45,7 +45,7 @@ Installation
         'django_su.backends.SuBackend',
     )
 
-4. Update your ``urls.py`` file:
+4. Update your ``urls.py`` file :
 
 .. code-block:: python
 
@@ -78,24 +78,25 @@ Note that `django ajax selects`_ requires the following settings:
 Configuration (optional)
 ------------------------
 
-There are various optional configuration options you can set in your settings.py::
+There are various optional configuration options you can set in your ``settings.py`` 
 
 .. code-block:: python
 
-   # URL to redirect after the login.
-   # Default: "/"
-   SU_LOGIN_REDIRECT_URL = "/" 
+    # URL to redirect after the login.
+    # Default: "/"
+    SU_LOGIN_REDIRECT_URL = "/" 
 
-   # URL to redirect after the logout.
-   # Default: "/"
-   SU_LOGOUT_REDIRECT_URL = "/dashboard/"
- 
-   # A function to specify the perms that the user must have can use django_su
-   # Default: None
-   SU_LOGIN_CALLBACK = "example.utils.su_login_callback"
-   
-   # A function to override the django.contrib.auth.login(request, user) function so you can set session data, etc.
-   SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
+    # URL to redirect after the logout.
+    # Default: "/"
+    SU_LOGOUT_REDIRECT_URL = "/dashboard/"
+
+    # A function to specify the perms that the user must have can use django_su
+    # Default: None
+    SU_LOGIN_CALLBACK = "example.utils.su_login_callback"
+
+    # A function to override the django.contrib.auth.login(request, user)
+    # function so you can set session data, etc.
+    SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
 Usage
 -----
