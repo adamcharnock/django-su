@@ -19,6 +19,8 @@ setup(
     url='http://github.com/adamcharnock/django-su',
     author='Adam Charnock',
     author_email='adam@adamcharnock.com',
+    maintainer='Basil Shubin',
+    maintainer_email='basil.shubin@gmail.com',
     install_requires=[
         'django>=1.4',
     ],    
