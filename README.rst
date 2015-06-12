@@ -96,6 +96,7 @@ There are various optional configuration options you can set in your ``settings.
 
     # A function to override the django.contrib.auth.login(request, user)
     # function so you can set session data, etc.
+    # Default: None
     SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
 Usage
