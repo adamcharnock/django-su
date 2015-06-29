@@ -1,5 +1,5 @@
-include README.textile
-include *.py
-recursive-include django_su *.py
-recursive-include django_su/templatetags *.py
+include CHANGES
+include LICENSE
+include README.rst
 recursive-include django_su/templates *
+recursive-include django_su/templatetags *

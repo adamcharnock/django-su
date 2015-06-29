@@ -1,7 +1,8 @@
 {% extends "admin/change_list.html" %}
 
-{% load i18n su_tags %}{% login_su_link user %}
+{% load i18n su_tags %}
+
 {% block object-tools-items %}
-    {% login_su_link user %}
-    {{ block.super }}
+  {% login_su_link user %}
+  {{ block.super }}
 {% endblock %}

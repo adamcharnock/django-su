@@ -1,6 +1,3 @@
 {% load i18n %}
-{% load url from future %}
-
-{% if can_su_login %}
-    <li><a href="{% url 'su_login' %}">{% trans "Login as other user" %}</a></li>
-{% endif %}
+{% load url from compat %}
+{% if can_su_login %}<li><a href="{% url 'su_login' %}">{% trans "Login as other user" %}</a></li>{% endif %}
