@@ -3,8 +3,10 @@
 import warnings
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import user_passes_test
+from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
@@ -21,6 +23,7 @@ from .forms import UserSuForm
 from .utils import su_login_callback, custom_login_action
 
 
+@require_http_methods(['POST'])
 @user_passes_test(su_login_callback)
 def login_as_user(request, user_id):
     userobj = authenticate(su=True, pk=user_id)
@@ -42,6 +45,7 @@ def login_as_user(request, user_id):
         getattr(settings, "SU_LOGIN_REDIRECT_URL", "/"))
 
 
+@require_http_methods(['POST', 'GET'])
 @user_passes_test(su_login_callback)
 def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
     form = form_class(request.POST or None)

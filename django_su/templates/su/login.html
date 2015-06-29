@@ -2,6 +2,8 @@
 
 {% load i18n admin_static %}
 
+{% block title %}{% trans "Login as" %} | {% trans 'Django site admin' %}{% endblock %}
+
 {% block extrahead %}
   {{ block.super }}
   {% if form.use_ajax_select %}
@@ -16,7 +18,7 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-  <form action="" method="POST">{% csrf_token %}
+  <form action="." method="POST">{% csrf_token %}
     {{ form }}
     <div class="submit-row">
       <input type="submit" name="submit" class="default" value="{% trans "Change Login" %}"/>
