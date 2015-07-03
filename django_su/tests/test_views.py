@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import auth
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
@@ -8,23 +9,29 @@ try:
 except ImportError:
     from django.contrib.auth.models import User
 
-
-class LoginAsUserViewTestCase(TestCase):
+class SuViewsBaseTestCase(TestCase):
 
     def setUp(self):
-        super(LoginAsUserViewTestCase, self).setUp()
+        super(SuViewsBaseTestCase, self).setUp()
         from django_su.views import login_as_user
         self.authorized_user = self.user('authorized', is_superuser=True)
         self.unauthorized_user = self.user('unauthorized')
         self.destination_user = self.user('destination')
         self.view = login_as_user
         self.client = Client()
+        # Causes errors with validation.
+        # TODO: Investigate
+        if 'ajax_select' in settings.INSTALLED_APPS:
+            settings.INSTALLED_APPS.remove('ajax_select')
 
     def user(self, username, **kwargs):
         user = User.objects.create(username=username, **kwargs)
         user.set_password('pass')
         user.save()
         return user
+
+
+class LoginAsUserViewTestCase(SuViewsBaseTestCase):
 
     def test_login_success(self):
         """Ensure login works for a valid user"""
@@ -91,3 +98,51 @@ class LoginAsUserViewTestCase(TestCase):
                 reverse('login_as_user', args=[self.destination_user.id])
             )
         self.assertTrue(flag['called'])
+
+
+class LoginViewTestCase(SuViewsBaseTestCase):
+
+    def test_get_authorised(self):
+        """Load the login page as an authorised user"""
+        self.client.login(username='authorized', password='pass')
+        response = self.client.get(reverse('su_login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_unauthorised(self):
+        """Load the login page as an authorised user"""
+        self.client.login(username='unauthorized', password='pass')
+        response = self.client.get(reverse('su_login'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_post_unauthorised(self):
+        """Post to the login page as an authorised user"""
+        self.client.login(username='unauthorized', password='pass')
+        response = self.client.post(reverse('su_login'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_post_valid(self):
+        """Ensure posting valid data logs the user in"""
+        self.client.login(username='authorized', password='pass')
+        response = self.client.post(reverse('su_login'), data=dict(
+            user=self.destination_user.id
+        ))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.destination_user.id))
+
+    def test_post_non_existent(self):
+        """Ensure posting a non-existent user does not log the user in"""
+        self.client.login(username='authorized', password='pass')
+        response = self.client.post(reverse('su_login'), data=dict(
+            user='999'
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+
+    def test_post_invalid(self):
+        """Ensure posting invalid data redisplays the form and does not log the user in"""
+        self.client.login(username='authorized', password='pass')
+        response = self.client.post(reverse('su_login'), data=dict(
+            user='abc'
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
