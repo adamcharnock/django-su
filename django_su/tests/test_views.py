@@ -1,7 +1,6 @@
 from django.contrib import auth
-from django.contrib.sessions.backends.db import SessionStore
 from django.core.urlresolvers import reverse
-from django.test import TestCase, RequestFactory, Client
+from django.test import TestCase, Client
 
 try:
     from django.contrib.auth import get_user_model
