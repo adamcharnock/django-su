@@ -10,3 +10,6 @@ dist/
 
 .DS_Store
 *.sqlite3
+
+/.idea
+.bash_history
