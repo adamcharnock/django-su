@@ -42,7 +42,7 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(response.status_code, 302)
         # Check the user is logged in in the session
         self.assertIn(auth.SESSION_KEY, self.client.session)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.destination_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.destination_user.id))
         # Check the 'exit_users_pk' is set so we know which user to change back to
         self.assertIn('exit_users_pk', self.client.session)
         self.assertEqual(
@@ -57,7 +57,7 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(response.status_code, 404)
         # User should still be logged in, but as the original user
         self.assertIn(auth.SESSION_KEY, self.client.session)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id))
         # Exit user should never get set
         self.assertNotIn('exit_users_pk', self.client.session)
 
@@ -71,7 +71,7 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(response.status_code, 302)
         # User should still be logged in, but as the original user
         self.assertIn(auth.SESSION_KEY, self.client.session)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.unauthorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.unauthorized_user.id))
         # Exit user should never get set
         self.assertNotIn('exit_users_pk', self.client.session)
 
@@ -127,7 +127,7 @@ class LoginViewTestCase(SuViewsBaseTestCase):
             user=self.destination_user.id
         ))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.destination_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.destination_user.id))
 
     def test_post_non_existent(self):
         """Ensure posting a non-existent user does not log the user in"""
@@ -136,7 +136,7 @@ class LoginViewTestCase(SuViewsBaseTestCase):
             user='999'
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id))
 
     def test_post_invalid(self):
         """Ensure posting invalid data redisplays the form and does not log the user in"""
@@ -145,7 +145,7 @@ class LoginViewTestCase(SuViewsBaseTestCase):
             user='abc'
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id))
 
 
 class LogoutViewTestCase(SuViewsBaseTestCase):
@@ -160,7 +160,7 @@ class LogoutViewTestCase(SuViewsBaseTestCase):
         response = self.client.get(reverse('su_logout'))
         self.assertEqual(response.status_code, 302)
         self.assertIn(auth.SESSION_KEY, self.client.session)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id))
 
     def test_valid_post(self):
         """Ensure user can logout via post"""
@@ -172,7 +172,7 @@ class LogoutViewTestCase(SuViewsBaseTestCase):
         response = self.client.post(reverse('su_logout'))
         self.assertEqual(response.status_code, 302)
         self.assertIn(auth.SESSION_KEY, self.client.session)
-        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+        self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id))
 
     def test_no_exit_pk(self):
         """Ensure logout fails if no exit pk present in session"""
