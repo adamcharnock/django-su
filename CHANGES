@@ -1,5 +1,14 @@
 ----
 
+Version 0.4.8, Fri 03 Jul 2015
+===============================
+
+2748e10e7c	Allow negative user id, fix #30 (Basil Shubin)
+ca73033541	improve python3 compatibility (Basil Shubin)
+e2dbf20bfd	Only import url from future when using Django < 1.5 (Basil Shubin)
+3d9860d948	Allowing only POST to login views. This avoid potential XSRF issues. (Jason Lawrence)
+
+
 Version 0.4.7, Wed 09 Jul 2014
 ===============================
 
@@ -8,7 +17,6 @@ Version 0.4.7, Wed 09 Jul 2014
 
 Version 0.4.6, Wed 09 Jul 2014
 ===============================
-
 
 
 Version 0.4.5, Sat 24 May 2014
