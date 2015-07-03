@@ -146,3 +146,57 @@ class LoginViewTestCase(SuViewsBaseTestCase):
         ))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+
+
+class LogoutViewTestCase(SuViewsBaseTestCase):
+
+    def test_valid_get(self):
+        """Ensure user can logout via get"""
+        s = self.client.session
+        s['exit_users_pk'] = [
+            ['1', 'django.contrib.auth.backends.ModelBackend'],
+        ]
+        s.save()
+        response = self.client.get(reverse('su_logout'))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(auth.SESSION_KEY, self.client.session)
+        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+
+    def test_valid_post(self):
+        """Ensure user can logout via post"""
+        s = self.client.session
+        s['exit_users_pk'] = [
+            ['1', 'django.contrib.auth.backends.ModelBackend'],
+        ]
+        s.save()
+        response = self.client.post(reverse('su_logout'))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(auth.SESSION_KEY, self.client.session)
+        self.assertEqual(self.client.session[auth.SESSION_KEY], str(self.authorized_user.id))
+
+    def test_no_exit_pk(self):
+        """Ensure logout fails if no exit pk present in session"""
+        response = self.client.get(reverse('su_logout'))
+        self.assertEqual(response.status_code, 400)
+
+    def test_non_existant_exit_pk(self):
+        """Ensure logout fails if no exit pk present in session"""
+        s = self.client.session
+        s['exit_users_pk'] = [
+            ['999', 'django.contrib.auth.backends.ModelBackend'],
+        ]
+        s.save()
+        response = self.client.get(reverse('su_logout'))
+        self.assertEqual(response.status_code, 404)
+
+    def test_redirect_url(self):
+        """Ensure logout redirect url setting respected"""
+        s = self.client.session
+        s['exit_users_pk'] = [
+            ['1', 'django.contrib.auth.backends.ModelBackend'],
+        ]
+        s.save()
+        with self.settings(SU_LOGOUT_REDIRECT_URL='/foo/bar'):
+            response = self.client.get(reverse('su_logout'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], 'http://testserver/foo/bar')
