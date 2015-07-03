@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
 
+    # 'guardian',
     'formadmin',  # pip install django-form-admin
     'ajax_select',  # pip install django-ajax-select
 ] + PROJECT_APPS
@@ -89,8 +90,11 @@ STATIC_URL = '/static/'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
+    # "guardian.backends.ObjectPermissionBackend",
     "django_su.backends.SuBackend",
 )
+
+# ANONYMOUS_USER_ID = -1
 
 # URL to redirect after the login.
 # Default: "/"
@@ -113,3 +117,4 @@ if 'ajax_select' in INSTALLED_APPS:
     AJAX_LOOKUP_CHANNELS = {
         'django_su':  dict(model='auth.user', search_field='username'),
     }
+

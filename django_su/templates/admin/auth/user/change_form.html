@@ -8,7 +8,7 @@
     <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
     <li>
       <form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}
-        <a href="#" onclick="this.parentNode.submit();" class="su">{% trans "Login as" %}</a>
+        <a href="javascript:void();" onclick="this.parentNode.submit();" class="su">{% trans "Login as" %}</a>
       </form>
     </li>
     {% if has_absolute_url %}
