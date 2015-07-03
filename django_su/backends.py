@@ -13,7 +13,21 @@ class SuBackend(object):
     def authenticate(self, su=False, pk=None, **credentials):
         if not su:
             return None
-        return User.objects.get(pk=pk)
+
+        try:
+            User._meta.pk.get_prep_value(pk)
+        except ValueError:
+            return None
+
+        try:
+            user = User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return None
+
+        return user
 
     def get_user(self, pk):
-        return User.objects.get(pk=pk)
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return None
