@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import auth
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
+from django.contrib.sessions.backends import cached_db
 
 try:
     from django.contrib.auth import get_user_model
@@ -18,7 +19,7 @@ class SuViewsBaseTestCase(TestCase):
         self.unauthorized_user = self.user('unauthorized')
         self.destination_user = self.user('destination')
         self.view = login_as_user
-        self.client = Client()
+        self.client = self.make_client()
         # Causes errors with validation.
         # TODO: Investigate
         if 'ajax_select' in settings.INSTALLED_APPS:
@@ -29,6 +30,13 @@ class SuViewsBaseTestCase(TestCase):
         user.set_password('pass')
         user.save()
         return user
+
+    def make_client(self):
+        client = Client()
+        s = cached_db.SessionStore()
+        s.save()
+        client.cookies[settings.SESSION_COOKIE_NAME] = s.session_key
+        return client
 
 
 class LoginAsUserViewTestCase(SuViewsBaseTestCase):
@@ -45,10 +53,9 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(str(self.client.session[auth.SESSION_KEY]), str(self.destination_user.id))
         # Check the 'exit_users_pk' is set so we know which user to change back to
         self.assertIn('exit_users_pk', self.client.session)
-        self.assertEqual(
-            self.client.session['exit_users_pk'],
-            [['1', 'django.contrib.auth.backends.ModelBackend']],
-        )
+        pk, backend = self.client.session['exit_users_pk'][0]
+        self.assertEqual(str(pk), str(self.authorized_user.pk))
+        self.assertEqual(backend, 'django.contrib.auth.backends.ModelBackend')
 
     def test_login_user_id_invalid(self):
         """Ensure login fails with an invalid user id"""
