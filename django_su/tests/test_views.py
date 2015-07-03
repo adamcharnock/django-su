@@ -1,8 +1,13 @@
 from django.contrib import auth
-from django.contrib.auth import get_user_model
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory, Client
+
+try:
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+except ImportError:
+    from django.contrib.auth.models import User
 
 
 class LoginAsUserViewTestCase(TestCase):
@@ -17,7 +22,7 @@ class LoginAsUserViewTestCase(TestCase):
         self.client = Client()
 
     def user(self, username, **kwargs):
-        user = get_user_model().objects.create(username=username, **kwargs)
+        user = User.objects.create(username=username, **kwargs)
         user.set_password('pass')
         user.save()
         return user

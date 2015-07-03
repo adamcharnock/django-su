@@ -1,13 +1,17 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+try:
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+except ImportError:
+    from django.contrib.auth.models import User
 
 class TestSuBackend(TestCase):
 
     def setUp(self):
         super(TestSuBackend, self).setUp()
         from django_su.backends import SuBackend
-        self.user = get_user_model().objects.create(username='testuser')
+        self.user = User.objects.create(username='testuser')
         self.backend = SuBackend()
 
     def test_authenticate_do_it(self):
