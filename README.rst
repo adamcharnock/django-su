@@ -3,7 +3,8 @@ django-su
 
 Login as any user from the Django admin interface, then switch back when done
 
-Authored by `Adam Charnock <http://adamcharnock.com/>`_, and some great `contributors <https://github.com/adamcharnock/django-su/contributors>`_.
+Authored by `Adam Charnock <http://adamcharnock.com/>`_, and some great
+`contributors <https://github.com/adamcharnock/django-su/contributors>`_.
 
 .. image:: https://img.shields.io/pypi/v/django-su.svg
     :target: https://pypi.python.org/pypi/django-su/
@@ -56,19 +57,20 @@ Installation
 
 And that should be it!
 
-Please see ``example`` application. This application is used to manually test the functionalities of this package. This also serves as a good example.
+Please see ``example`` application. This application is used to manually test
+the functionalities of this package. This also serves as a good example.
 
-You need only Django 1.4 or above to run that. It might run on older versions but that is not tested.
+``django-su`` requires Django 1.4 or above. Older versions *may* work but are untested.
 
 External dependencies (optional, but recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you install these two apps the enhance user experience:
+The following apps are optional but will enhance the user experience:
 
-* The 'login su' form will render using `django admin forms`_
-* The user selection widget will render using `django ajax selects`_
+* The 'login su' form will render using `django-form-admin`_
+* The user selection widget will render using `django-ajax-selects`_
 
-Note that `django ajax selects`_ requires the following settings:
+Note that `django-ajax-selects`_ requires the following settings:
 
 .. code-block:: python
 
@@ -88,14 +90,15 @@ There are various optional configuration options you can set in your ``settings.
 
     # URL to redirect after the logout.
     # Default: "/"
-    SU_LOGOUT_REDIRECT_URL = "/dashboard/"
+    SU_LOGOUT_REDIRECT_URL = "/"
 
-    # A function to specify the perms that the user must have can use django_su
+    # A function specifying the permissions a user requires in order
+    # to use the django-su functionality.
     # Default: None
     SU_LOGIN_CALLBACK = "example.utils.su_login_callback"
 
     # A function to override the django.contrib.auth.login(request, user)
-    # function so you can set session data, etc.
+    # view, thereby allowing one to set session data, etc.
     # Default: None
     SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
@@ -118,6 +121,6 @@ This app was put together by Adam Charnock, but was largely based on ideas, code
 
 django-su is packaged using seed_.
 
-.. _django admin forms: http://pypi.python.org/pypi/django-form-admin
-.. _django ajax selects: http://pypi.python.org/pypi/django-ajax-selects
+.. _django-form-admin: http://pypi.python.org/pypi/django-form-admin
+.. _django-ajax-selects: http://pypi.python.org/pypi/django-ajax-selects
 .. _seed: https://github.com/adamcharnock/seed/
