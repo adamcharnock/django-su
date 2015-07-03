@@ -4,18 +4,17 @@
 
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
-  <form id="suform" style="display:none;" action="{% url 'login_as_user' object_id %}" method="POST">
-    {% csrf_token %}
-  </form>
   <ul class="object-tools grp-object-tools">
     <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
     <li>
-      <a href="#" onclick="document.getElementById('suform').submit();" class="su">{% trans "Login as" %}</a>
+      <form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}
+        <a href="#" onclick="this.parentNode.submit();" class="su">{% trans "Login as" %}</a>
+      </form>
     </li>
     {% if has_absolute_url %}
-        <li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">
-            {% trans "View on site" %}</a>
-        </li>
+      <li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">
+        {% trans "View on site" %}</a>
+      </li>
     {% endif%}
   </ul>
 {% endif %}{% endif %}
