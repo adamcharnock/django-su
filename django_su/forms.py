@@ -15,7 +15,7 @@ except ImportError:
 class UserSuForm(forms.Form):
 
     user = forms.ModelChoiceField(
-        label=_('users'), queryset=User.objects, required=True)
+        label=_('users'), queryset=User._default_manager, required=True) # pylint: disable=W0212
 
     use_ajax_select = False
     
