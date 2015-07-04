@@ -3,7 +3,6 @@
 import warnings
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.http import require_http_methods
