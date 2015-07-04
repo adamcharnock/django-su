@@ -10,24 +10,19 @@ except ImportError:
 
 class SuBackend(object):
 
-    def authenticate(self, su=False, pk=None, **credentials):
+    def authenticate(self, su=False, user_id=None, **credentials):
         if not su:
             return None
 
         try:
-            User._meta.pk.get_prep_value(pk)
-        except ValueError:
-            return None
-
-        try:
-            user = User.objects.get(pk=pk)
-        except User.DoesNotExist:
+            user = User._default_manager.get(pk=user_id)
+        except (User.DoesNotExist, ValueError):
             return None
 
         return user
 
-    def get_user(self, pk):
+    def get_user(self, user_id):
         try:
-            return User.objects.get(pk=pk)
+            return User._default_manager.get(pk=user_id)
         except User.DoesNotExist:
             return None
