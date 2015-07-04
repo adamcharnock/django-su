@@ -12,4 +12,5 @@ dist/
 *.sqlite3
 
 /.idea
-.bash_history
+/.bash_history
+/.coverage

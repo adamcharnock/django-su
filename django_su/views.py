@@ -3,7 +3,6 @@
 import warnings
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.http import require_http_methods
@@ -26,7 +25,7 @@ from .utils import su_login_callback, custom_login_action
 @require_http_methods(['POST'])
 @user_passes_test(su_login_callback)
 def login_as_user(request, user_id):
-    userobj = authenticate(su=True, pk=user_id)
+    userobj = authenticate(su=True, user_id=user_id)
     if not userobj:
         raise Http404("User not found")
 
