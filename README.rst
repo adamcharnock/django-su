@@ -18,8 +18,8 @@ Authored by `Adam Charnock <http://adamcharnock.com/>`_, and some great
 .. image:: https://img.shields.io/travis/adamcharnock/django-su.svg
     :target: https://travis-ci.org/adamcharnock/django-su/
 
-.. image:: https://coveralls.io/repos/adamcharnock/django-su/badge.svg?branch=master
-    :target: https://coveralls.io/r/adamcharnock/django-su?branch=master
+.. image:: https://coveralls.io/repos/adamcharnock/django-su/badge.svg?branch=develop
+    :target: https://coveralls.io/r/adamcharnock/django-su?branch=develop
 
 Installation
 ------------
