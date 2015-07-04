@@ -9,7 +9,7 @@ except ImportError:
 
 
 class SuBackend(object):
-    supports_inactive_user = True
+    supports_inactive_user = False
 
     def authenticate(self, su=False, user_id=None, **kwargs):
         if not su:
