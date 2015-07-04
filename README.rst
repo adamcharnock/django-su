@@ -26,37 +26,37 @@ Installation
 
 1. Either checkout ``django_su`` from GitHub, or install using ``pip`` :
 
-.. code-block:: bash
+   .. code-block:: bash
 
-    pip install django-su
+       pip install django-su
 
 2. Add ``django_su`` to your ``INSTALLED_APPS``. Make sure you put it *before* ``django.contrib.admin`` :
 
-.. code-block:: python
+   .. code-block:: python
 
-    INSTALLED_APPS = (
-        ...
-        'django_su',  # must be before ``django.contrib.admin``
-        'django.contrib.admin',
-    )
+       INSTALLED_APPS = (
+           ...
+           'django_su',  # must be before ``django.contrib.admin``
+           'django.contrib.admin',
+       )
 
 3. Add ``SuBackend`` to ``AUTHENTICATION_BACKENDS`` :
 
-.. code-block:: python
+   .. code-block:: python
 
-    AUTHENTICATION_BACKENDS = (
-        ...
-        'django_su.backends.SuBackend',
-    )
+       AUTHENTICATION_BACKENDS = (
+           ...
+           'django_su.backends.SuBackend',
+       )
 
 4. Update your ``urls.py`` file :
 
-.. code-block:: python
+   .. code-block:: python
 
-    urlpatterns = patterns('',
-        url(r'^su/', include('django_su.urls')),
-        ...
-    )
+       urlpatterns = patterns('',
+           url(r'^su/', include('django_su.urls')),
+           ...
+       )
 
 And that should be it!
 
