@@ -13,6 +13,6 @@ if django.VERSION[:2] < (1, 5):
     # is to get the url template tag that supports context variables
     # for the first argument, yet won't raise a deprecation warning
     # about importing it from future.
-    from django.templatetags.future import url
+    from django.templatetags.future import url  # NOQA
 else:
     from django.template.defaulttags import url  # NOQA
