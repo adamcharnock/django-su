@@ -9,8 +9,9 @@ except ImportError:
 
 
 class SuBackend(object):
+    supports_inactive_user = True
 
-    def authenticate(self, su=False, user_id=None, **credentials):
+    def authenticate(self, su=False, user_id=None, **kwargs):
         if not su:
             return None
 
