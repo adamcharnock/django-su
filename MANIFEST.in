@@ -3,4 +3,3 @@ include LICENSE
 include README.rst
 recursive-include django_su/locale *
 recursive-include django_su/templates *
-recursive-include django_su/templatetags *
