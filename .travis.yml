@@ -21,6 +21,7 @@ script:
   - env PYTHONPATH=`pwd` coverage run --source=django_su example/manage.py test django_su
 after_success:
   coveralls
+sudo: required
 matrix:
   exclude:
     - python: "pypy3"
