@@ -17,7 +17,7 @@ install:
   - python setup.py develop
   - pip install -q coveralls
 script:
-  - coverage run --source=django_su setup.py test
+  - coverage run --source=django_su runtests.py
 after_success:
   coveralls
 matrix:
