@@ -1,29 +1,84 @@
+#!/usr/bin/env python
+
 import os
+import re
+import sys
+import codecs
+import subprocess
+
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 
-README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
-# allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+class TestRunner(TestCommand):
+    user_options = []
 
-from django_su import __version__
+    def run(self):
+        raise SystemExit(subprocess.call([sys.executable, 'runtests.py']))
+
+
+# When creating the sdist, make sure the django.mo file also exists:
+if 'sdist' in sys.argv:
+    os.chdir('django_su')
+    try:
+        from django.core.management.commands.compilemessages import Command
+        command = Command()
+        command.execute(stdout=sys.stderr, verbosity=1)
+    except ImportError:
+        # < Django 1.7
+        from django.core.management.commands.compilemessages import compile_messages
+        compile_messages(sys.stderr)
+    finally:
+        os.chdir('..')
+
+
+def read(*parts):
+    file_path = os.path.join(os.path.dirname(__file__), *parts)
+    return codecs.open(file_path, encoding='utf-8').read()
+
+
+def find_version(*parts):
+    version_file = read(*parts)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    if version_match:
+        return str(version_match.group(1))
+    raise RuntimeError("Unable to find version string.")
+
 
 setup(
     name='django-su',
-    version=__version__,
-    packages=find_packages(exclude=['example']),
-    include_package_data=True,
+    version=find_version('django_su', '__init__.py'),
     license='MIT License',
+    
+    install_requires=[
+        'django>=1.4.2',
+    ],
+    requires=[
+        'Django (>=1.4.2)',
+    ],
+
     description="Login as any user from the Django admin interface, then switch back when done",
-    long_description=README,
-    url='http://github.com/adamcharnock/django-su',
+    long_description=read('README.rst'),
+
     author='Adam Charnock',
     author_email='adam@adamcharnock.com',
+
     maintainer='Basil Shubin',
     maintainer_email='basil.shubin@gmail.com',
-    install_requires=[
-        'django>=1.4',
-    ],    
+
+    url='http://github.com/adamcharnock/django-su',
+    download_url='https://github.com/adamcharnock/django-su/zipball/master',
+
+    packages=find_packages(exclude=('example*', '*.tests*')),
+    include_package_data=True,
+
+    tests_require=[
+    ],
+    cmdclass={
+        'test': TestRunner,
+    },
+    
+    zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
@@ -40,5 +95,4 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    zip_safe=False,
 )

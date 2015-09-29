@@ -1,2 +1,2 @@
-from django_su.tests.test_backends import *
-from django_su.tests.test_views import *
+from .test_backends import *
+from .test_views import *
