@@ -36,11 +36,11 @@ class UserSuForm(forms.Form):
     def get_user(self):
         return self.cleaned_data.get('user', None)
 
-    def __unicode__(self):
+    def __str__(self):
         if 'formadmin' in settings.INSTALLED_APPS:
             from formadmin.forms import as_django_admin
             try:
                 return as_django_admin(self)
             except ImportError:
                 pass
-        return super(UserSuForm, self).__unicode__()
+        return super(UserSuForm, self).__str__()
