@@ -11,18 +11,20 @@ try:
 except ImportError:
     from django.contrib.auth.models import User
 
-    
+
 class UserSuForm(forms.Form):
 
     user = forms.ModelChoiceField(
-        label=_('Users'), queryset=User._default_manager.order_by('username'), required=True) # pylint: disable=W0212
+        label=_('Users'), queryset=User._default_manager.order_by(
+            'username'), required=True)  # pylint: disable=W0212
 
     use_ajax_select = False
-    
+
     def __init__(self, *args, **kwargs):
         super(UserSuForm, self).__init__(*args, **kwargs)
 
-        if 'ajax_select' in settings.INSTALLED_APPS and getattr(settings, 'AJAX_LOOKUP_CHANNELS', None):
+        if 'ajax_select' in settings.INSTALLED_APPS and getattr(
+                settings, 'AJAX_LOOKUP_CHANNELS', None):
             from ajax_select.fields import AutoCompleteSelectField
 
             lookup = settings.AJAX_LOOKUP_CHANNELS.get('django_su', None)
@@ -30,7 +32,10 @@ class UserSuForm(forms.Form):
                 old_field = self.fields['user']
 
                 self.fields['user'] = AutoCompleteSelectField(
-                    'django_su', required=old_field.required, label=old_field.label)
+                    'django_su',
+                    required=old_field.required,
+                    label=old_field.label,
+                )
                 self.use_ajax_select = True
 
     def get_user(self):

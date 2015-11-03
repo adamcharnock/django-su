@@ -38,7 +38,10 @@ def login_as_user(request, user_id):
     request.session["exit_users_pk"] = exit_users_pk
 
     if hasattr(settings, 'SU_REDIRECT_LOGIN'):
-        warnings.warn("SU_REDIRECT_LOGIN is deprecated, use SU_LOGIN_REDIRECT_URL", DeprecationWarning)
+        warnings.warn(
+            "SU_REDIRECT_LOGIN is deprecated, use SU_LOGIN_REDIRECT_URL",
+            DeprecationWarning,
+        )
 
     return HttpResponseRedirect(
         getattr(settings, "SU_LOGIN_REDIRECT_URL", "/"))
@@ -50,8 +53,8 @@ def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
     form = form_class(request.POST or None)
     if form.is_valid():
         return login_as_user(request, form.get_user().pk)
-    
-    return render_to_response(template_name,{
+
+    return render_to_response(template_name, {
         'form': form,
     }, context_instance=RequestContext(request))
 
@@ -72,7 +75,10 @@ def su_logout(request):
     request.session["exit_users_pk"] = exit_users_pk
 
     if hasattr(settings, 'SU_REDIRECT_EXIT'):
-        warnings.warn("SU_REDIRECT_EXIT is deprecated, use SU_LOGOUT_REDIRECT_URL", DeprecationWarning)
+        warnings.warn(
+            "SU_REDIRECT_EXIT is deprecated, use SU_LOGOUT_REDIRECT_URL",
+            DeprecationWarning,
+        )
 
     return HttpResponseRedirect(
         getattr(settings, "SU_LOGOUT_REDIRECT_URL", "/"))

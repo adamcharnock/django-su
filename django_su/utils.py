@@ -42,7 +42,10 @@ def importpath(path, error_text=None):
 
 def su_login_callback(user):
     if hasattr(settings, 'SU_LOGIN'):
-        warnings.warn("SU_LOGIN is deprecated, use SU_LOGIN_CALLBACK", DeprecationWarning)
+        warnings.warn(
+            "SU_LOGIN is deprecated, use SU_LOGIN_CALLBACK",
+            DeprecationWarning,
+        )
 
     func = getattr(settings, 'SU_LOGIN_CALLBACK', None)
     if func is not None:
@@ -56,7 +59,7 @@ def custom_login_action(request, user):
     func = getattr(settings, 'SU_CUSTOM_LOGIN_ACTION', None)
     if func is None:
         return False
-        
+
     if not isinstance(func, collections.Callable):
         func = importpath(func)
     func(request, user)
