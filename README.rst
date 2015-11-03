@@ -117,6 +117,27 @@ as" button in the top right.
 Once you have su'ed into a user, you can get exit back into your
 original user by navigating to ``/su/`` in your browser.
 
+Notify superuser when connected with another user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This option warns the superuser when working with another user as
+initally logged in. To activate this option perform:
+
+1. Add ``django_su.context_processors.is_su`` to ``TEMPLATE_CONTEXT_PROCESSORS`` :
+
+   .. code-block:: python
+
+       TEMPLATE_CONTEXT_PROCESSORS = (
+           ...
+           'django_su.context_processors.is_su',
+       )
+
+2. In your ``base.html`` include ``su/is_su.html`` snippet :
+
+   .. code-block:: html+django
+
+       {% include "su/is_su.html" %}
+
 Credits
 -------
 
