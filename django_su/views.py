@@ -11,13 +11,7 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-try:
-    from django.contrib.auth import get_user_model
-
-    User = get_user_model()
-except ImportError:
-    from django.contrib.auth.models import User
-
+from . import get_user_model
 from .forms import UserSuForm
 from .utils import su_login_callback, custom_login_action
 
@@ -67,7 +61,7 @@ def su_logout(request):
 
     user_id, backend = exit_users_pk.pop()
 
-    userobj = get_object_or_404(User, pk=user_id)
+    userobj = get_object_or_404(get_user_model(), pk=user_id)
     userobj.backend = backend
 
     if not custom_login_action(request, userobj):
