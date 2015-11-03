@@ -1,19 +1,19 @@
 {% load i18n %}
 
-{% if DJANGO_SU_IS_SU %}
-    <div id="djangoSuWarning" style="position: fixed; bottom: 0; width: 100%; color: white; background-color: red;">
-        {% trans "WARNING : Your are connected with another account !" %}
-    </div>
-    <style>
-        #djangoSuWarning {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: white;
-            background-color: red;
-            text-align: center;
-            font-size: 25px;
-            z-index: 5000;
-        }
-    </style>
+{% if IS_SU %}
+  <div id="djangoSuWarning" style="position: fixed; bottom: 0; width: 100%; color: white; background-color: red;">
+    {% trans "WARNING : Your are connected with another account !" %}
+  </div>
+  <style>
+    #djangoSuWarning {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      background-color: red;
+      text-align: center;
+      font-size: 25px;
+      z-index: 5000;
+    }
+  </style>
 {% endif %}
