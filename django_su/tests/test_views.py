@@ -3,9 +3,10 @@ from django.contrib import auth
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.contrib.sessions.backends import cached_db
+from django.utils.datetime_safe import datetime
 
 try:
-    from django.contrib.auth import get_user_model
+    from django.contrib.auth import get_user_model, user_logged_in
 
     User = get_user_model()
 except ImportError:
@@ -107,6 +108,35 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
                 reverse('login_as_user', args=[self.destination_user.id])
             )
         self.assertTrue(flag['called'])
+
+    def test_last_login_not_changed(self):
+        self.destination_user.last_login = datetime(2000, 1, 1)
+        self.destination_user.save()
+        self.client.login(username='authorized', password='pass')
+        response = self.client.post(
+            reverse('login_as_user', args=[self.destination_user.id])
+        )
+        self.destination_user = User.objects.get(pk=self.destination_user.pk)
+        self.assertEqual(self.destination_user.last_login, datetime(2000, 1, 1))
+        # Check the update_last_login function has been reconnected to the user_logged_in signal
+        connections = [str(ref[1]) for ref in auth.user_logged_in.receivers if 'update_last_login' in str(ref[1])]
+        self.assertTrue(connections)
+
+
+    def test_login_signal_reconnected_following_error(self):
+        self.client.login(username='authorized', password='pass')
+        def error_action(request, user):
+            raise Exception()
+        with self.settings(SU_CUSTOM_LOGIN_ACTION=error_action):
+            try:
+                response = self.client.post(
+                    reverse('login_as_user', args=[self.destination_user.id])
+                )
+            except:
+                pass
+        # Check the update_last_login function has been reconnected to the user_logged_in signal
+        connections = [str(ref[1]) for ref in auth.user_logged_in.receivers if 'update_last_login' in str(ref[1])]
+        self.assertTrue(connections)
 
 
 class LoginViewTestCase(SuViewsBaseTestCase):
