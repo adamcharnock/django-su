@@ -33,7 +33,6 @@ def login_as_user(request, user_id):
         if not custom_login_action(request, userobj):
             login(request, userobj)
     finally:
-        pass
         user_logged_in.connect(update_last_login)
     request.session["exit_users_pk"] = exit_users_pk
 
