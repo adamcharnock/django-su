@@ -3,8 +3,9 @@
 import warnings
 
 from django.conf import settings
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, user_logged_in
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import update_last_login
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
@@ -27,8 +28,12 @@ def login_as_user(request, user_id):
     exit_users_pk.append(
         (request.session[SESSION_KEY], request.session[BACKEND_SESSION_KEY]))
 
-    if not custom_login_action(request, userobj):
-        login(request, userobj)
+    user_logged_in.disconnect(update_last_login)
+    try:
+        if not custom_login_action(request, userobj):
+            login(request, userobj)
+    finally:
+        user_logged_in.connect(update_last_login)
     request.session["exit_users_pk"] = exit_users_pk
 
     if hasattr(settings, 'SU_REDIRECT_LOGIN'):
