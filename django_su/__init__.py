@@ -1,4 +1,3 @@
-__version__ = '0.4.8'
 
 
 def get_user_model():
