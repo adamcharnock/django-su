@@ -55,7 +55,7 @@ def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
 
     return render_to_response(template_name, {
         'form': form,
-    }, context_instance=RequestContext(request))
+    })
 
 
 def su_logout(request):

@@ -93,7 +93,7 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
                 reverse('login_as_user', args=[self.destination_user.id])
             )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], 'http://testserver/foo/bar')
+        self.assertTrue('/foo/bar' in response['Location'])
 
     def test_custom_login_action(self):
         """Ensure custom login action is called"""
@@ -238,4 +238,4 @@ class LogoutViewTestCase(SuViewsBaseTestCase):
         with self.settings(SU_LOGOUT_REDIRECT_URL='/foo/bar'):
             response = self.client.get(reverse('su_logout'))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], 'http://testserver/foo/bar')
+        self.assertTrue('/foo/bar' in response['Location'])
