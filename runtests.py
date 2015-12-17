@@ -23,6 +23,15 @@ if not settings.configured:
         TEMPLATE_DIRS = (
             path.join(BASE_DIR, 'test_templates'),
         ),
+        TEMPLATES = [
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'DIRS': [
+                    path.join(BASE_DIR, 'test_templates'),
+                ],
+                'APP_DIRS': True,
+            },
+        ],
         INSTALLED_APPS = (
             'django.contrib.auth',
             'django.contrib.sites',
