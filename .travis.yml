@@ -5,14 +5,15 @@ python:
   - "2.7"
   - "2.6"
 env:
-  - DJANGO_VERSION=1.4.2
-  - DJANGO_VERSION=1.5
-  - DJANGO_VERSION=1.6
-  - DJANGO_VERSION=1.7
-  - DJANGO_VERSION=1.8
-  - DJANGO_VERSION=1.9
+  - DJANGO=1.4.2
+  - DJANGO=1.5
+  - DJANGO=1.6
+  - DJANGO=1.7
+  - DJANGO=1.8
+  - DJANGO=1.9
+  - DJANGO=https://github.com/django/django/archive/master.tar.gz
 before_install:
-  - pip install -q django==$DJANGO_VERSION
+  - pip install -q $DJANGO
 install:
   - python setup.py develop
   - pip install -q coveralls
@@ -23,14 +24,18 @@ after_success:
 matrix:
   exclude:
     - python: "2.6"
-      env: DJANGO_VERSION=1.7
+      env: DJANGO=1.7
     - python: "2.6"
-      env: DJANGO_VERSION=1.8
+      env: DJANGO=1.8
     - python: "2.6"
-      env: DJANGO_VERSION=1.9
+      env: DJANGO=1.9
+    - python: "2.6"
+      env: DJANGO=https://github.com/django/django/archive/master.tar.gz
     - python: "3.3"
-      env: DJANGO_VERSION=1.4.2
+      env: DJANGO=1.4.2
     - python: "3.3"
-      env: DJANGO_VERSION=1.9
+      env: DJANGO=1.9
+    - python: "3.3"
+      env: DJANGO=https://github.com/django/django/archive/master.tar.gz
     - python: "3.4"
-      env: DJANGO_VERSION=1.4.2
+      env: DJANGO=1.4.2
