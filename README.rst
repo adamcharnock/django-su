@@ -56,10 +56,10 @@ Installation
 
    .. code-block:: python
 
-       urlpatterns = patterns('',
+       urlpatterns = [
            url(r'^su/', include('django_su.urls')),
            ...
-       )
+       ]
 
 And that should be it!
 
