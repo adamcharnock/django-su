@@ -3,6 +3,27 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 0.5.1, Wed 23 Mar 2016
+===============================
+
+6f781a02fe	updated example (bashu)
+db634b5d6e	su now works with django-suit, fix #48 (bashu)
+245700d9fc	using django's module loading utils, fix #45 (bashu)
+d1ee129ac8	Update README.rst (Basil Shubin)
+a659a40e8a	fixed my own fixes (kudos to @PetrDlouhy) (bashu)
+ba5e4f8984	switched from zipball to tarball (bashu)
+4c060a84c9	fix for Django 1.10 (Petr Dlouhý)
+96d1178806	test (with allow failures) on dev (Petr Dlouhý)
+890004401d	updated example project (bashu)
+24cb98f6b7	getting rid of pypy (bashu)
+eccb6743f9	fixed .travis.yml (bashu)
+92e9c20a3e	added django 1.9 support (bashu)
+632db8ff8c	fixed "RemovedInDjango110Warning: The context_instance argument of render_to_string is deprecated..." (bashu)
+56f8acf462	fixed "RemovedInDjango110Warning: You haven't defined a TEMPLATES setting..." (bashu)
+7b2d58b751	fixed "RemovedInDjango110Warning: django.conf.urls.patterns() is deprecated..." (bashu)
+edb9b166ef	cleanup CHANGES.txt (bashu)
+
+
 Version 0.5.0, Fri 27 Nov 2015
 ===============================
 
