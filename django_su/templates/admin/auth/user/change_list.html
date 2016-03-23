@@ -3,6 +3,6 @@
 {% load i18n su_tags %}
 
 {% block object-tools-items %}
-  {% login_su_link user %}
+  <li>{% login_su_link user %}</li>
   {{ block.super }}
 {% endblock %}

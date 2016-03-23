@@ -1,21 +1,17 @@
 {% extends "admin/change_form.html" %}
-{% load url from compat %}
 {% load i18n %}
+{% load url from compat %}
 
-{% block object-tools %}
-{% if change %}{% if not is_popup %}
-  <ul class="object-tools grp-object-tools">
-    <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
-    <li>
-      <form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}
-        <a href="javascript:void();" onclick="this.parentNode.submit();" class="su">{% trans "Login as" %}</a>
-      </form>
-    </li>
-    {% if has_absolute_url %}
-      <li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">
-        {% trans "View on site" %}</a>
-      </li>
-    {% endif%}
-  </ul>
-{% endif %}{% endif %}
+{% block object-tools-items %}
+  {{ block.super }}
+  <li>
+    <a href="javascript:void(0);" onclick="document.getElementById('suform').submit();" class="su">
+      <i class="icon-user icon-alpha75"></i>{% trans "Login as" %}
+    </a>
+  </li>
+{% endblock %}
+
+{% block content %}
+  {{ block.super }}
+  <form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}</form>
 {% endblock %}
