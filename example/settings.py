@@ -63,15 +63,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 PROJECT_APPS = [
     'django_su',
-    'django.contrib.admin',
 ]
 
 INSTALLED_APPS = [
+    # 'suit',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
+    'django.contrib.admin',
 
     # 'guardian',
     'formadmin',  # pip install django-form-admin
