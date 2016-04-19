@@ -9,8 +9,7 @@ from django.contrib.auth.models import update_last_login
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 
 from . import get_user_model
 from .forms import UserSuForm
@@ -53,7 +52,7 @@ def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
     if form.is_valid():
         return login_as_user(request, form.get_user().pk)
 
-    return render_to_response(template_name, {
+    return render(request, template_name, {
         'form': form,
     })
 
