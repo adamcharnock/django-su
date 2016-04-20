@@ -19,9 +19,9 @@ class UsersLookup(LookupChannel):
               Q(username__icontains=q) | Q(pk__icontains=q)).order_by('pk')
 
     def format_match(self, obj):
-        return escape(force_text("%s (%s)" % (
-            obj.pk, obj.get_full_name() or obj.username)))
+        return escape(force_text("%s [pk: %s]" % (
+            obj.get_full_name() or obj.username, obj.pk)))
 
     def format_item_display(self, obj):
-        return escape(force_text("%s (%s)" % (
-            obj.pk, obj.get_full_name() or obj.username)))
+        return escape(force_text("%s [pk: %s]" % (
+            obj.get_full_name() or obj.username, obj.pk)))
