@@ -85,7 +85,7 @@ INSTALLED_APPS = [
 
     # 'guardian',
     # 'formadmin',  # pip install django-form-admin
-    # 'ajax_select',  # pip install django-ajax-select
+    'ajax_select',  # pip install django-ajax-select
 ] + PROJECT_APPS
 
 
@@ -148,6 +148,6 @@ SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
 if 'ajax_select' in INSTALLED_APPS:
     AJAX_LOOKUP_CHANNELS = {
-        'django_su':  dict(model='auth.user', search_field='username'),
+        'django_su': ('example.lookups', 'UsersLookup'),
     }
 
