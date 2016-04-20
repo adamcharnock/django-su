@@ -84,7 +84,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     # 'guardian',
-    # 'formadmin',  # pip install django-form-admin
+    'formadmin',  # pip install django-form-admin
     'ajax_select',  # pip install django-ajax-select
 ] + PROJECT_APPS
 
