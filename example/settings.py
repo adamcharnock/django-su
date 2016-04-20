@@ -30,25 +30,6 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(os.path.dirname(__file__), 'templates'),
-        ],
-        'APP_DIRS': True,
-    },
-]
-
-# Application definition
-
-MIDDLEWARE_CLASSES = [
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-]
-
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.core.context_processors.i18n",
@@ -61,12 +42,40 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django_su.context_processors.is_su",
 )
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(os.path.dirname(__file__), 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+
+                "django_su.context_processors.is_su",
+            ],
+        },
+    },
+]
+
+# Application definition
+
+MIDDLEWARE_CLASSES = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+
 PROJECT_APPS = [
     'django_su',
 ]
 
 INSTALLED_APPS = [
-    # 'suit',
+    # 'suit',  # pip install django-suit
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.sessions',
@@ -75,8 +84,8 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     # 'guardian',
-    'formadmin',  # pip install django-form-admin
-    'ajax_select',  # pip install django-ajax-select
+    # 'formadmin',  # pip install django-form-admin
+    # 'ajax_select',  # pip install django-ajax-select
 ] + PROJECT_APPS
 
 
