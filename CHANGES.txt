@@ -3,6 +3,17 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 0.5.2, Wed 20 Apr 2016
+===============================
+
+3d09b7bec4	re-enabling ``formadmin`` (bashu)
+b56f68f476	small improvement (bashu)
+20f6217818	added ``UsersLookup`` as example (bashu)
+d58bc4ce45	make sure ``example`` project works with django 1.9+ (bashu)
+7126f4a1b2	replace render_to_response to render (Konstantin Seleznev)
+7a7c1c1a2c	fixed a stupid mistake in template (bashu)
+
+
 Version 0.5.1, Wed 23 Mar 2016
 ===============================
 
