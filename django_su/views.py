@@ -3,6 +3,7 @@
 import warnings
 
 from django.conf import settings
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, user_logged_in
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import update_last_login
@@ -16,6 +17,7 @@ from .forms import UserSuForm
 from .utils import su_login_callback, custom_login_action
 
 
+@csrf_protect
 @require_http_methods(['POST'])
 @user_passes_test(su_login_callback)
 def login_as_user(request, user_id):
@@ -45,6 +47,7 @@ def login_as_user(request, user_id):
         getattr(settings, "SU_LOGIN_REDIRECT_URL", "/"))
 
 
+@csrf_protect
 @require_http_methods(['POST', 'GET'])
 @user_passes_test(su_login_callback)
 def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
