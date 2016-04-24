@@ -86,8 +86,9 @@ INSTALLED_APPS = [
     # 'guardian',
     'formadmin',  # pip install django-form-admin
     'ajax_select',  # pip install django-ajax-select
-] + PROJECT_APPS
+]
 
+INSTALLED_APPS = PROJECT_APPS + INSTALLED_APPS
 
 ROOT_URLCONF = 'example.urls'
 
