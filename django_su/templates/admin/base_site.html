@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block welcome-msg %}
+  {% if IS_SU %}
+    <a href="{% url 'su_logout' %}" title="{% trans 'Exit back into your original session' %}">{% trans 'You are' %}</a>{% trans ' logged in as,' %}
+  {% else %}
+    {% trans 'Welcome,' %}
+  {% endif %}
+  <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+{% endblock %}
+ 
+{% block nav-global %}{% endblock %}
