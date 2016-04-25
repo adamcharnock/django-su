@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-24 21:09-0300\n"
+"PO-Revision-Date: 2016-04-24 21:31-0300\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7\n"
+
+#: .\forms.py:13
+msgid "Users"
+msgstr "Usuários"
+
+#: .\templates\admin\auth\user\change_form.html:9 .\templates\su\login.html:5
+msgid "Login as"
+msgstr "Acessar como"
+
+#: .\templates\admin\base_site.html:6 .\templates\su\login.html.py:5
+msgid "Django site admin"
+msgstr ""
+
+#: .\templates\admin\base_site.html:9
+msgid "Django administration"
+msgstr ""
+
+#: .\templates\admin\base_site.html:14
+msgid "Exit back into your original session"
+msgstr "Retornar para sua sessão original"
+
+#: .\templates\admin\base_site.html:14
+msgid "You are"
+msgstr "Você"
+
+#: .\templates\admin\base_site.html:14
+msgid " logged in as,"
+msgstr " acessou como,"
+
+#: .\templates\admin\base_site.html:16
+msgid "Welcome,"
+msgstr "Bem-vindo(a),"
+
+#: .\templates\su\is_su.html:16
+msgid "WARNING: You have assumed the identity of another account!"
+msgstr "AVISO: Você assumiu o acesso de outra conta!"
+
+#: .\templates\su\login.html:24
+msgid "Change Login"
+msgstr "Alterar Acesso"
+
+#: .\templates\su\login_link.html:3
+msgid "Login as other user"
+msgstr "Acessar como outro usuário"
