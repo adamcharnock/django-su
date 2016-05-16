@@ -2,7 +2,7 @@
 This file exists to contain all Django and Python compatibility issues.
 
 In order to avoid circular references, nothing should be imported from
-tz_detect.
+django_su.
 """
 
 import sys
