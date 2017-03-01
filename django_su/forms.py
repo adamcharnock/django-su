@@ -38,8 +38,8 @@ class UserSuForm(forms.Form):
 
     def __str__(self):
         if 'formadmin' in settings.INSTALLED_APPS:
-            from formadmin.forms import as_django_admin
             try:
+                from formadmin.forms import as_django_admin
                 return as_django_admin(self)
             except ImportError:
                 pass
