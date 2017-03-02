@@ -1,9 +1,13 @@
 from django.conf import settings
 from django.contrib import auth
-from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.contrib.sessions.backends import cached_db
 from django.utils.datetime_safe import datetime
+
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 try:
     from django.contrib.auth import get_user_model, user_logged_in
