@@ -4,14 +4,16 @@
 
 {% block object-tools-items %}
   {{ block.super }}
+  {% if object_id %}
   <li>
     <a href="javascript:void(0);" onclick="document.getElementById('suform').submit();" class="su">
       <i class="icon-user icon-alpha75"></i>{% trans "Login as" %}
     </a>
   </li>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
   {{ block.super }}
-  <form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}</form>
+  {% if object_id %}<form id="suform" action="{% url 'login_as_user' object_id %}" method="POST">{% csrf_token %}</form>{% endif %}
 {% endblock %}
