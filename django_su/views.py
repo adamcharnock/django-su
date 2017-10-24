@@ -18,7 +18,7 @@ from .utils import su_login_callback, custom_login_action
 
 
 @csrf_protect
-@require_http_methods(['POST'])
+# @require_http_methods(['POST'])
 @user_passes_test(su_login_callback)
 def login_as_user(request, user_id):
     userobj = authenticate(su=True, user_id=user_id)
