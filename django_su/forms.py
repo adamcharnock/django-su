@@ -9,9 +9,10 @@ from . import get_user_model
 
 class UserSuForm(forms.Form):
 
+    UserModel = get_user_model()
     user = forms.ModelChoiceField(
-        label=_('Users'), queryset=get_user_model()._default_manager.order_by(
-            'username'), required=True)  # pylint: disable=W0212
+        label=_('Users'), queryset=UserModel._default_manager.order_by(
+            UserModel.USERNAME_FIELD), required=True)  # pylint: disable=W0212
 
     use_ajax_select = False
 
