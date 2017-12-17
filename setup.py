@@ -5,7 +5,6 @@ import sys
 import codecs
 
 from setuptools import setup, find_packages
-from setuptest import test
 
 # When creating the sdist, make sure the django.mo file also exists:
 if 'sdist' in sys.argv or 'develop' in sys.argv:
@@ -57,7 +56,6 @@ setup(
         'coveralls',
     ],
     test_suite='setuptest.setuptest.SetupTestSuite',
-    cmdclass={'test': test},
     
     zip_safe=False,
     classifiers=[
