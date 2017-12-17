@@ -30,10 +30,10 @@ setup(
     license='MIT License',
     
     install_requires=[
-        'django>=1.4.2',
+        'django>=1.5',
     ],
     requires=[
-        'Django (>=1.4.2)',
+        'Django (>=1.5)',
     ],
 
     description="Login as any user from the Django admin interface, then switch back when done",
@@ -56,7 +56,7 @@ setup(
         'coveralls',
     ],
     test_suite='setuptest.setuptest.SetupTestSuite',
-    
+
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
