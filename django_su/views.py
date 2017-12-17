@@ -6,7 +6,6 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate, user_logged_in
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.models import update_last_login
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
@@ -29,13 +28,18 @@ def login_as_user(request, user_id):
     exit_users_pk.append(
         (request.session[SESSION_KEY], request.session[BACKEND_SESSION_KEY]))
 
-    user_logged_in.disconnect(update_last_login)
+    maintain_last_login = hasattr(userobj, 'last_login')
+    if maintain_last_login:
+        last_login = userobj.last_login
+
     try:
         if not custom_login_action(request, userobj):
             login(request, userobj)
+        request.session["exit_users_pk"] = exit_users_pk
     finally:
-        user_logged_in.connect(update_last_login)
-    request.session["exit_users_pk"] = exit_users_pk
+        if maintain_last_login:
+            userobj.last_login = last_login
+            userobj.save(update_fields=['last_login'])
 
     if hasattr(settings, 'SU_REDIRECT_LOGIN'):
         warnings.warn(
