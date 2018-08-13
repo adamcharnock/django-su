@@ -3,6 +3,13 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 0.7.0, Mon 13 Aug 2018
+===============================
+
+2cec5cca12	Adding missing version bump (Adam Charnock)
+89d36c414f	Add request to authenticate call (Ilaissa Romero)
+
+
 Version 0.5.2, Wed 20 Apr 2016
 ===============================
 
