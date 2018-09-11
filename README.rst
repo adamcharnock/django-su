@@ -149,17 +149,17 @@ your `ModelAdmin` in your `admin.py` file will need tweaking as follows:
 
    .. code-block:: python
 
-   # Within your admin.py file
-   from django.contrib import admin
-   from django.contrib.auth.admin import UserAdmin
+       # Within your admin.py file
+       from django.contrib import admin
+       from django.contrib.auth.admin import UserAdmin
 
-   from . import models
+       from . import models
 
-    @admin.register(models.CustomUser)
-    class CustomUserAdmin(UserAdmin):
-        # The following two lines are needed:
-        change_form_template = "admin/auth/user/change_form.html"
-        change_list_template = "admin/auth/user/change_list.html"
+        @admin.register(models.CustomUser)
+        class CustomUserAdmin(UserAdmin):
+            # The following two lines are needed:
+            change_form_template = "admin/auth/user/change_form.html"
+            change_list_template = "admin/auth/user/change_list.html"
 
 This ensures the Django admin will use the correct template customisations for
 your custom user model.
