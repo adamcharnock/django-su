@@ -82,17 +82,17 @@ Note that `django-ajax-selects`_ requires the following settings:
 
     AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
 
-   
+
 Configuration (optional)
 ------------------------
 
-There are various optional configuration options you can set in your ``settings.py`` 
+There are various optional configuration options you can set in your ``settings.py``
 
 .. code-block:: python
 
     # URL to redirect after the login.
     # Default: "/"
-    SU_LOGIN_REDIRECT_URL = "/" 
+    SU_LOGIN_REDIRECT_URL = "/"
 
     # URL to redirect after the logout.
     # Default: "/"
@@ -117,11 +117,14 @@ as" button in the top right.
 Once you have su'ed into a user, you can get exit back into your
 original user by navigating to ``/su/`` in your browser.
 
-Notify superuser when connected with another user
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to
+------
+
+How to Notify superuser when connected with another user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This option warns the superuser when working with another user as
-initally logged in. To activate this option perform:
+initially logged in. To activate this option perform:
 
 1. Add ``django_su.context_processors.is_su`` to ``TEMPLATE_CONTEXT_PROCESSORS`` :
 
@@ -137,6 +140,30 @@ initally logged in. To activate this option perform:
    .. code-block:: html+django
 
        {% include "su/is_su.html" %}
+
+How to use django-su with a custom user model (AUTH_USER_MODEL)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Django-su should function normally with a custom user model. However,
+your `ModelAdmin` in your `admin.py` file will need tweaking as follows:
+
+   .. code-block:: python
+
+   # Within your admin.py file
+   from django.contrib import admin
+   from django.contrib.auth.admin import UserAdmin
+
+   from . import models
+
+    @admin.register(models.CustomUser)
+    class CustomUserAdmin(UserAdmin):
+        # The following two lines are needed:
+        change_form_template = "admin/auth/user/change_form.html"
+        change_list_template = "admin/auth/user/change_list.html"
+
+This ensures the Django admin will use the correct template customisations for
+your custom user model.
+
 
 Credits
 -------
