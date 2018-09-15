@@ -6,7 +6,7 @@ from . import get_user_model
 class SuBackend(object):
     supports_inactive_user = False
 
-    def authenticate(self, su=False, user_id=None, **kwargs):
+    def authenticate(self, request=None, su=False, user_id=None, **kwargs):
         if not su:
             return None
 
