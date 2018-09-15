@@ -3,6 +3,16 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 0.8.0, Sat 15 Sep 2018
+===============================
+
+e6b2bc9d78	Update argument of django-su.backends.authenticate function (Geoffrey H. Ferrari)
+a46c152adb	Update UserSuForm to enhance compatibility with custom user models. (Geoffrey H. Ferrari)
+2235eac863	Documenting use of AUTH_USER_MODEL with django-su (formatting fix) (Adam Charnock)
+56921c216d	Documenting use of AUTH_USER_MODEL with django-su (formatting fix) (Adam Charnock)
+74b3ccd7ba	Documenting use of AUTH_USER_MODEL with django-su. Closes #62 (Adam Charnock)
+
+
 Version 0.7.0, Mon 13 Aug 2018
 ===============================
 
