@@ -10,17 +10,20 @@ class SuBackend(object):
         if not su:
             return None
 
+        user_model = get_user_model()
+
         try:
-            user = get_user_model()._default_manager.get(
+            user = user_model._default_manager.get(
                 pk=user_id)  # pylint: disable=W0212
-        except (get_user_model().DoesNotExist, ValueError):
+        except (user_model.DoesNotExist, ValueError):
             return None
 
         return user
 
     def get_user(self, user_id):
+        user_model = get_user_model()
         try:
-            return get_user_model()._default_manager.get(
+            return user_model._default_manager.get(
                 pk=user_id)  # pylint: disable=W0212
-        except get_user_model().DoesNotExist:
+        except user_model.DoesNotExist:
             return None
