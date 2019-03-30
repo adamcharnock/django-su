@@ -21,9 +21,6 @@ Authored by `Adam Charnock <http://adamcharnock.com/>`_, and some great
 .. image:: https://coveralls.io/repos/adamcharnock/django-su/badge.svg?branch=develop
     :target: https://coveralls.io/r/adamcharnock/django-su?branch=develop
 
-.. image:: https://landscape.io/github/adamcharnock/django-su/develop/landscape.svg?style=flat
-    :target: https://landscape.io/github/adamcharnock/django-su/develop
-
 Installation
 ------------
 
