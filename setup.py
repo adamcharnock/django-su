@@ -30,10 +30,10 @@ setup(
     license='MIT License',
 
     install_requires=[
-        'django>=1.5',
+        'django>=1.11',
     ],
     requires=[
-        'Django (>=1.5)',
+        'Django (>=1.11)',
     ],
 
     description="Login as any user from the Django admin interface, then switch back when done",
@@ -52,7 +52,7 @@ setup(
     include_package_data=True,
 
     tests_require=[
-        'django-setuptest',
+        'django-setuptest @ git+ssh://git@github.com/hamstap85/django-setuptest.git@develop#egg=django-setuptest',
         'coveralls',
     ],
     test_suite='setuptest.setuptest.SetupTestSuite',
