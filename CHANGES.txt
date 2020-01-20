@@ -20,6 +20,33 @@ Version 0.7.0, Mon 13 Aug 2018
 89d36c414f	Add request to authenticate call (Ilaissa Romero)
 
 
+Version 0.6.0, Mon 18 Dec 2017
+===============================
+
+9c2db58f78	Disabling CI for django 2.0 on python 2.7 (Adam Charnock)
+9e89c52e82	Dropping support for django 1.4 (Adam Charnock)
+4a37193a2d	Reverting testing changes to setup.py (Adam Charnock)
+17d9d06e86	Fixes for django 2.0. Had to change how the user's last_login was maintained due to changes in Signal.disconnect() (Adam Charnock)
+8d00040c5b	No need for su when adding a new user (Riccardo Magliocchetti)
+d9bad3c19f	Update .travis.yml (Basil Shubin)
+137a50ef5a	ref @446b698 (Basil Shubin)
+2bc30f43f0	added missing TEMPLATE_DIRS (Basil Shubin)
+22cb5214ba	dropped python 2.6 and 3.3 from support (Basil Shubin)
+5e399e84d5	upgraded test suite (Basil Shubin)
+446b6986e5	Fix for relocation of django.core.urlresolvers -> django.urls in Django 2 (Adam Charnock)
+d05ffa3783	No longer testing django master against python 2 (Django 2 will support Python 3 only) (Adam Charnock)
+d98ab119da	fix broken exception handler (Basil Shubin)
+4e6187b53b	Update compat.py (Basil Shubin)
+69c1442a13	Update MANIFEST.in (Basil Shubin)
+a6eaa28630	New translation (Gustavo Santana)
+5d5902f1ca	make sure compat template tag library is loaded (bashu)
+f7c7d78808	customized admin/base_site.html, fix #54 (bashu)
+8731d5a3ad	update example project (bashu)
+f75ea07657	make sure all csrf protection is enabled (bashu)
+7d637e8de4	remove whitespaces (bashu)
+d5185c0fa1	Correct grammar used in warning (Fred Palmer)
+
+
 Version 0.5.2, Wed 20 Apr 2016
 ===============================
 

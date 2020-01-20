@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from . import get_user_model
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class SuBackend(object):
@@ -11,16 +13,16 @@ class SuBackend(object):
             return None
 
         try:
-            user = get_user_model()._default_manager.get(
+            user = User._default_manager.get(
                 pk=user_id)  # pylint: disable=W0212
-        except (get_user_model().DoesNotExist, ValueError):
+        except (User.DoesNotExist, ValueError):
             return None
 
         return user
 
     def get_user(self, user_id):
         try:
-            return get_user_model()._default_manager.get(
+            return User._default_manager.get(
                 pk=user_id)  # pylint: disable=W0212
-        except get_user_model().DoesNotExist:
+        except User.DoesNotExist:
             return None
