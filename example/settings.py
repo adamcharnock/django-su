@@ -55,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
+                'django.contrib.messages.context_processors.messages',
 
                 "django_su.context_processors.is_su",
             ],
@@ -64,7 +65,7 @@ TEMPLATES = [
 
 # Application definition
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -82,10 +83,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'django.contrib.admin',
+    'django.contrib.messages',
 
     # 'guardian',
     'formadmin',  # pip install django-form-admin
-    'ajax_select',  # pip install django-ajax-select
+    'ajax_select',  # pip install django-ajax-selects
 ]
 
 INSTALLED_APPS = PROJECT_APPS + INSTALLED_APPS
@@ -132,7 +134,7 @@ AUTHENTICATION_BACKENDS = (
 
 # URL to redirect after the login.
 # Default: "/"
-SU_LOGIN_REDIRECT_URL = "/" 
+SU_LOGIN_REDIRECT_URL = "/"
 
 # URL to redirect after the logout.
 # Default: "/"

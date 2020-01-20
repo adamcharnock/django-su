@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
+from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY, get_user_model
+
 try:
     from django.contrib.auth import HASH_SESSION_KEY
 except ImportError:
     HASH_SESSION_KEY = '_auth_user_hash'
 
-from django_su import get_user_model
+User = get_user_model()
 
 
 def su_login_callback(user):
@@ -19,7 +20,7 @@ def _get_user_session_key(request):
     # This value in the session is always serialized to a string, so we need
     # to convert it back to Python whenever we access it.
 
-    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+    return User._meta.pk.to_python(request.session[SESSION_KEY])
 
 
 def custom_login(request, user):
