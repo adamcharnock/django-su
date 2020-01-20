@@ -4,8 +4,7 @@ import warnings
 import collections
 
 from django.conf import settings
-
-from .compat import import_by_path as import_string
+from django.utils.module_loading import import_string
 
 
 def su_login_callback(user):

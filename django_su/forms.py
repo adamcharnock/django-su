@@ -2,17 +2,18 @@
 
 from django import forms
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
-from . import get_user_model
+User = get_user_model()
 
 
 class UserSuForm(forms.Form):
 
-    username_field = get_user_model().USERNAME_FIELD
+    username_field = User.USERNAME_FIELD
 
     user = forms.ModelChoiceField(
-        label=_('Users'), queryset=get_user_model()._default_manager.order_by(
+        label=_('Users'), queryset=User._default_manager.order_by(
             username_field), required=True)  # pylint: disable=W0212
 
     use_ajax_select = False

@@ -4,16 +4,17 @@ import warnings
 
 from django.conf import settings
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import login, authenticate, user_logged_in
+from django.contrib.auth import get_user_model, login, authenticate, user_logged_in
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 
-from . import get_user_model
 from .forms import UserSuForm
 from .utils import su_login_callback, custom_login_action
+
+User = get_user_model()
 
 
 @csrf_protect
@@ -72,7 +73,7 @@ def su_logout(request):
 
     user_id, backend = exit_users_pk.pop()
 
-    userobj = get_object_or_404(get_user_model(), pk=user_id)
+    userobj = get_object_or_404(User, pk=user_id)
     userobj.backend = backend
 
     if not custom_login_action(request, userobj):
