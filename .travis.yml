@@ -18,6 +18,7 @@ before_install:
   - pip install -q $DJANGO
 install:
   - python setup.py develop
+  - pip install -r requirements.test.txt .
 script:
   - ./example/manage.py test
 after_success:

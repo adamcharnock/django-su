@@ -51,10 +51,6 @@ setup(
     packages=find_packages(exclude=('example*', '*.tests*')),
     include_package_data=True,
 
-    tests_require=[
-        'coveralls',
-    ],
-
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

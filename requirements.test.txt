@@ -1,0 +1,3 @@
+coveralls
+django-form-admin
+django-ajax-selects
