@@ -19,7 +19,7 @@ before_install:
 install:
   - python setup.py develop
 script:
-  - python setup.py test
+  - ./example/manage.py test
 after_success:
   - coveralls
 matrix:

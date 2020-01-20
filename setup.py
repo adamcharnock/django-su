@@ -28,7 +28,7 @@ setup(
     name='django-su',
     version=read('VERSION'),
     license='MIT License',
-    
+
     install_requires=[
         'django>=1.5',
     ],
@@ -52,10 +52,8 @@ setup(
     include_package_data=True,
 
     tests_require=[
-        'django-setuptest',
         'coveralls',
     ],
-    test_suite='setuptest.setuptest.SetupTestSuite',
 
     zip_safe=False,
     classifiers=[
@@ -70,10 +68,10 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',        
-        'Programming Language :: Python :: 3.5',        
-        'Programming Language :: Python :: 3.6',        
-        'Programming Language :: Python :: 3.7',        
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
