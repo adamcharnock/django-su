@@ -3,6 +3,29 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 0.9.0, Mon 20 Jan 2020
+===============================
+
+efaf6f65c0	Updating setup.py for django version support changes (Adam Charnock)
+3afa8335d2	Work on migrating away from django-setuptest, as it is no longer maintained (Adam Charnock)
+10da766742	Work on migrating away from django-setuptest, as it is no longer maintained (Adam Charnock)
+360d621293	Work on migrating away from django-setuptest, as it is no longer maintained (Adam Charnock)
+117b0a2c92	Updating CI config for django 3 and python 3.8 (Adam Charnock)
+b88eb7441c	remove deprecated template loader 'admin_static' in favor to 'static' (Genesis Guerrero Martinez)
+ae406537e2	Dropped support for django < 1.11 (Basil Shubin)
+662a472783	minor: call get_user_model once per method (Daniel Hahler)
+b7a4cbfbe5	Version bump to 0.8.0 and updating CHANGES.txt (Adam Charnock)
+57c42a6cf3	Update argument of django-su.backends.authenticate function (Geoffrey H. Ferrari)
+9c037ed3eb	Update UserSuForm to enhance compatibility with custom user models. (Geoffrey H. Ferrari)
+30502d08b9	Documenting use of AUTH_USER_MODEL with django-su (formatting fix) (Adam Charnock)
+861a59776a	Documenting use of AUTH_USER_MODEL with django-su (formatting fix) (Adam Charnock)
+e88ab1fd63	Documenting use of AUTH_USER_MODEL with django-su. Closes #62 (Adam Charnock)
+f4b397ccac	Version bump to 0.7.0 and updating CHANGES.txt (Adam Charnock)
+60cccda009	Adding missing version bump (Adam Charnock)
+18df6887a6	Add request to authenticate call (Ilaissa Romero)
+ee2787a368	Version bump to 0.6.0 and updating CHANGES.txt (Adam Charnock)
+
+
 Version 0.8.0, Sat 15 Sep 2018
 ===============================
 
