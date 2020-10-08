@@ -32,3 +32,18 @@ def custom_login_action(request, user):
     func(request, user)
 
     return True
+
+
+def custom_logout_action(request, user):
+    func = getattr(settings, 'SU_CUSTOM_LOGOUT_ACTION', None)
+    if func is None:
+        # Backwards compatibility
+        func = getattr(settings, 'SU_CUSTOM_LOGIN_ACTION', None)
+        if func is None:
+            return False
+
+    if not isinstance(func, collections.Callable):
+        func = import_string(func)
+    func(request, user)
+
+    return True

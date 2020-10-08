@@ -246,3 +246,20 @@ class LogoutViewTestCase(SuViewsBaseTestCase):
             response = self.client.get(reverse('su_logout'))
         self.assertEqual(response.status_code, 302)
         self.assertTrue('/foo/bar' in response['Location'])
+
+    def test_custom_logout_action(self):
+        """Ensure custom logout action is called"""
+        self.client.login(username='authorized', password='pass')
+        response = self.client.post(
+            reverse('login_as_user', args=[self.destination_user.id])
+        )
+
+        flag = { 'called': False }
+        def custom_action(request, user):
+            flag['called'] = True
+
+        with self.settings(SU_CUSTOM_LOGOUT_ACTION=custom_action):
+            response = self.client.post(
+                reverse('su_logout')
+            )
+        self.assertTrue(flag['called'])
