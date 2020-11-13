@@ -53,3 +53,24 @@ class UserSuForm(forms.Form):
             except ImportError:
                 pass
         return super(UserSuForm, self).__str__()
+
+
+class UserSuDalForm(UserSuForm):
+    def __init__(self, *args, **kwargs):
+        super(UserSuForm, self).__init__(*args, **kwargs)
+
+        if {"dal", "dal_select2"}.issubset(settings.INSTALLED_APPS) and getattr(
+            settings, "SU_DAL_VIEW_NAME", None
+        ):
+            try:
+                from dal import autocomplete
+            except ImportError:
+                return
+            old_field = self.fields["user"]
+
+            self.fields["user"] = forms.ModelChoiceField(
+                required=old_field.required,
+                label=old_field.label,
+                queryset=old_field.queryset,
+                widget=autocomplete.ModelSelect2(url=settings.SU_DAL_VIEW_NAME),
+            )

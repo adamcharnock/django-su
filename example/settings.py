@@ -85,6 +85,8 @@ INSTALLED_APPS = [
     # 'guardian',
     "formadmin",  # pip install django-form-admin
     "ajax_select",  # pip install django-ajax-selects
+    "dal",  # pip install django-autocomplete-light
+    "dal_select2",  # pip install django-autocomplete-light
 ]
 
 INSTALLED_APPS = PROJECT_APPS + INSTALLED_APPS

@@ -72,6 +72,9 @@ The following apps are optional but will enhance the user experience:
 
 * The 'login su' form will render using `django-form-admin`_
 * The user selection widget will render using `django-ajax-selects`_
+* The user selection widget will render using `django-autocomplete-light`_
+
+`django-autocomplete-light`_ and `django-ajax-selects`_ are mutually exclusive.
 
 Note that `django-ajax-selects`_ requires the following settings:
 
@@ -79,6 +82,41 @@ Note that `django-ajax-selects`_ requires the following settings:
 
     AJAX_LOOKUP_CHANNELS = {'django_su':  dict(model='auth.user', search_field='username')}
 
+`django-autocomplete-light`_ requires the following configuration:
+
+.. code-block:: python
+
+    # settings.py
+    # this setting will be used to find the named url for the autocomplete view
+    SU_DAL_VIEW_NAME = 'user-autocomplete'
+
+    # views.py
+    # we need an autocomplete view
+    from dal import autocomplete
+    from django.contrib.auth.models import User
+
+    class UserAutoComplete(autocomplete.Select2QuerySetView):
+      def get_queryset(self):
+        user = self.request.user
+        qs = User.objects.none()
+        if user.is_authenticated and user.is_staff:
+          qs = User.objects.filter(username__icontains=self.q)
+
+        return qs.order_by('pk')
+
+    # urls.py
+    from .views import UserAutoComplete
+    from django.conf.urls import url
+    from django.conf import settings
+
+    urlpatterns = [
+      #...
+      url(r'^user-autocomplete/$',
+          UserAutoComplete.as_view(),
+          name=settings.SU_DAL_VIEW_NAME
+      )
+      #....
+    ]
 
 Configuration (optional)
 ------------------------
@@ -174,4 +212,5 @@ django-su is packaged using seed_.
 
 .. _django-form-admin: http://pypi.python.org/pypi/django-form-admin
 .. _django-ajax-selects: http://pypi.python.org/pypi/django-ajax-selects
+.. _django-autocomplete-light: https://pypi.org/project/django-autocomplete-light/
 .. _seed: https://github.com/adamcharnock/seed/
