@@ -30,10 +30,10 @@ setup(
     license='MIT License',
 
     install_requires=[
-        'django>=1.11',
+        'django>=2.2',
     ],
     requires=[
-        'Django (>=1.11)',
+        'Django (>=2.2)',
     ],
 
     description="Login as any user from the Django admin interface, then switch back when done",
@@ -61,14 +61,11 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
