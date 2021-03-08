@@ -12,7 +12,7 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 
 from .forms import UserSuForm
-from .utils import su_login_callback, custom_login_action
+from .utils import su_login_callback, custom_login_action, custom_logout_action
 
 User = get_user_model()
 
@@ -76,7 +76,7 @@ def su_logout(request):
     userobj = get_object_or_404(User, pk=user_id)
     userobj.backend = backend
 
-    if not custom_login_action(request, userobj):
+    if not custom_logout_action(request, userobj):
         login(request, userobj)
     request.session["exit_users_pk"] = exit_users_pk
 

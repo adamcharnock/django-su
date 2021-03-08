@@ -51,3 +51,7 @@ def custom_login(request, user):
         rotate_token(request)
     except ImportError:
         pass
+
+
+# Same as custom_login, for backwards compatibility
+custom_logout = custom_login

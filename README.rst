@@ -105,6 +105,11 @@ There are various optional configuration options you can set in your ``settings.
     # Default: None
     SU_CUSTOM_LOGIN_ACTION = "example.utils.custom_login"
 
+    # A function to override the django.contrib.auth.login(request, user)
+    # view on logout. (django_su logs you in as the su'er on su_logout.)
+    # Default: SU_CUSTOM_LOGIN_ACTION
+    SU_CUSTOM_LOGOUT_ACTION = "example.utils.custom_logout"
+
 Usage
 -----
 
