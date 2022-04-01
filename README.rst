@@ -63,7 +63,7 @@ And that should be it!
 Please see ``example`` application. This application is used to manually test
 the functionalities of this package. This also serves as a good example.
 
-``django-su`` requires Django 1.5 or above.
+``django-su`` is tested on Django 2.2 or above, lower versions may work, but are considered unsupported.
 
 External dependencies (optional, but recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
