@@ -12,7 +12,7 @@ except ImportError:
     from django.core.urlresolvers import reverse
 
 try:
-    from django.contrib.auth import get_user_model, user_logged_in
+    from django.contrib.auth import get_user_model
 
     User = get_user_model()
 except ImportError:
@@ -116,18 +116,14 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
             flag["called"] = True
 
         with self.settings(SU_CUSTOM_LOGIN_ACTION=custom_action):
-            response = self.client.post(
-                reverse("login_as_user", args=[self.destination_user.id])
-            )
+            self.client.post(reverse("login_as_user", args=[self.destination_user.id]))
         self.assertTrue(flag["called"])
 
     def test_last_login_not_changed(self):
         self.destination_user.last_login = datetime(2000, 1, 1, tzinfo=timezone.utc)
         self.destination_user.save()
         self.client.login(username="authorized", password="pass")
-        response = self.client.post(
-            reverse("login_as_user", args=[self.destination_user.id])
-        )
+        self.client.post(reverse("login_as_user", args=[self.destination_user.id]))
         self.destination_user = User.objects.get(pk=self.destination_user.pk)
         self.assertEqual(self.destination_user.last_login.date(), date(2000, 1, 1))
         # Check the update_last_login function has been reconnected to the user_logged_in signal
@@ -146,10 +142,10 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
 
         with self.settings(SU_CUSTOM_LOGIN_ACTION=error_action):
             try:
-                response = self.client.post(
+                self.client.post(
                     reverse("login_as_user", args=[self.destination_user.id])
                 )
-            except:
+            except Exception:
                 pass
         # Check the update_last_login function has been reconnected to the user_logged_in signal
         connections = [
