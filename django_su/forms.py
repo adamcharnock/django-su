@@ -11,11 +11,13 @@ User = get_user_model()
 
 class UserSuForm(forms.Form):
 
-    username_field = User.USERNAME_FIELD
+    username_field = getattr(User, "USERNAME_FIELD", None)
 
     user = forms.ModelChoiceField(
         label=_("Users"),
-        queryset=User._default_manager.order_by(username_field),
+        queryset=User._default_manager.order_by(username_field)
+        if username_field
+        else User._default_manager.all(),
         required=True,
     )  # pylint: disable=W0212
 
