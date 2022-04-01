@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+
 try:
     from django.contrib.auth import get_user_model
 

@@ -2,9 +2,10 @@ from datetime import date, timezone
 
 from django.conf import settings
 from django.contrib import auth
-from django.test import TestCase, Client
 from django.contrib.sessions.backends import cached_db
+from django.test import Client, TestCase
 from django.utils.datetime_safe import datetime
+
 
 try:
     from django.urls import reverse

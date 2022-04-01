@@ -2,7 +2,8 @@
 
 from django.urls import path
 
-from .views import su_logout, su_login, login_as_user
+from .views import login_as_user, su_login, su_logout
+
 
 urlpatterns = [
     path("", su_logout, name="su_logout"),

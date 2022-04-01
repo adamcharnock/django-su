@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from ajax_select import LookupChannel, register
 from django.db.models import Q
 from django.utils.encoding import force_text
 from django.utils.html import escape
-
-from ajax_select import register, LookupChannel
 
 from django_su import get_user_model
 

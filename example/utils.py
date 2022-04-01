@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY, get_user_model
+from django.contrib.auth import BACKEND_SESSION_KEY, SESSION_KEY, get_user_model
+
 
 try:
     from django.contrib.auth import HASH_SESSION_KEY

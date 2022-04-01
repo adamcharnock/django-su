@@ -4,6 +4,7 @@ from django import template
 
 from ..utils import su_login_callback
 
+
 register = template.Library()
 
 
