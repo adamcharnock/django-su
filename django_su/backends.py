@@ -13,8 +13,7 @@ class SuBackend(object):
             return None
 
         try:
-            user = User._default_manager.get(
-                pk=user_id)  # pylint: disable=W0212
+            user = User._default_manager.get(pk=user_id)  # pylint: disable=W0212
         except (User.DoesNotExist, ValueError):
             return None
 
@@ -22,7 +21,6 @@ class SuBackend(object):
 
     def get_user(self, user_id):
         try:
-            return User._default_manager.get(
-                pk=user_id)  # pylint: disable=W0212
+            return User._default_manager.get(pk=user_id)  # pylint: disable=W0212
         except User.DoesNotExist:
             return None
