@@ -3,6 +3,12 @@ Change-log for django-su.
 This file will be added to as part of each release
 ----
 
+Version 1.0.0, Fri 1 May 2022
+==============================
+
+Fix compatibility with Django 4.0
+Test in Django versions 2.2 - 4.0, Python versions 3.7 - 3.10
+
 Version 0.9.0, Mon 20 Jan 2020
 ===============================
 
