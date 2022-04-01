@@ -2,22 +2,14 @@ from datetime import date, timezone
 
 from django.conf import settings
 from django.contrib import auth
+from django.contrib.auth import get_user_model
 from django.contrib.sessions.backends import cached_db
 from django.test import Client, TestCase
+from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
 
-try:
-    from django.urls import reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
-
-try:
-    from django.contrib.auth import get_user_model
-
-    User = get_user_model()
-except ImportError:
-    from django.contrib.auth.models import User
+User = get_user_model()
 
 
 class SuViewsBaseTestCase(TestCase):
