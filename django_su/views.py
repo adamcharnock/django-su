@@ -3,16 +3,22 @@
 import warnings
 
 from django.conf import settings
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import get_user_model, login, authenticate
+from django.contrib.auth import (
+    BACKEND_SESSION_KEY,
+    SESSION_KEY,
+    authenticate,
+    get_user_model,
+    login,
+)
 from django.contrib.auth.decorators import user_passes_test
-from django.views.decorators.http import require_http_methods
-from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
-from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
+from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_http_methods
 
 from .forms import UserSuForm
-from .utils import su_login_callback, custom_login_action
+from .utils import custom_login_action, su_login_callback
+
 
 User = get_user_model()
 
