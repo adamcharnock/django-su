@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -79,9 +82,12 @@ jobs:
               pip uninstall -y django-ajax-selects
               pip install git+https://github.com/andyzickler/django-ajax-selects@remove-default-app-config
       - name: Testing
+        run: PYTHONPATH=`pwd` python -W error::DeprecationWarning -m coverage run --source django_su ./example/manage.py test
+      - name: upload coverage
         run: |
-          PYTHONPATH=`pwd` python -W error::DeprecationWarning -m coverage run --source django_su ./example/manage.py test
-          coverage xml && codecov
+          coverage xml
+          coveralls --service=github
+          codecov
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost/postgres"
 
