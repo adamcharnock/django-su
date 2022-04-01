@@ -1,11 +1,10 @@
-from datetime import date
+from datetime import date, timezone
 
 from django.conf import settings
 from django.contrib import auth
 from django.test import TestCase, Client
 from django.contrib.sessions.backends import cached_db
 from django.utils.datetime_safe import datetime
-from pytz import utc
 
 try:
     from django.urls import reverse
@@ -117,7 +116,7 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertTrue(flag['called'])
 
     def test_last_login_not_changed(self):
-        self.destination_user.last_login = datetime(2000, 1, 1, tzinfo=utc)
+        self.destination_user.last_login = datetime(2000, 1, 1, tzinfo=timezone.utc)
         self.destination_user.save()
         self.client.login(username='authorized', password='pass')
         response = self.client.post(
