@@ -18,7 +18,7 @@ User = get_user_model()
 
 
 @csrf_protect
-@require_http_methods(['POST'])
+@require_http_methods(["POST"])
 @user_passes_test(su_login_callback)
 def login_as_user(request, user_id):
     userobj = authenticate(request=request, su=True, user_id=user_id)
@@ -27,9 +27,10 @@ def login_as_user(request, user_id):
 
     exit_users_pk = request.session.get("exit_users_pk", default=[])
     exit_users_pk.append(
-        (request.session[SESSION_KEY], request.session[BACKEND_SESSION_KEY]))
+        (request.session[SESSION_KEY], request.session[BACKEND_SESSION_KEY])
+    )
 
-    maintain_last_login = hasattr(userobj, 'last_login')
+    maintain_last_login = hasattr(userobj, "last_login")
     if maintain_last_login:
         last_login = userobj.last_login
 
@@ -40,36 +41,38 @@ def login_as_user(request, user_id):
     finally:
         if maintain_last_login:
             userobj.last_login = last_login
-            userobj.save(update_fields=['last_login'])
+            userobj.save(update_fields=["last_login"])
 
-    if hasattr(settings, 'SU_REDIRECT_LOGIN'):
+    if hasattr(settings, "SU_REDIRECT_LOGIN"):
         warnings.warn(
             "SU_REDIRECT_LOGIN is deprecated, use SU_LOGIN_REDIRECT_URL",
             DeprecationWarning,
         )
 
-    return HttpResponseRedirect(
-        getattr(settings, "SU_LOGIN_REDIRECT_URL", "/"))
+    return HttpResponseRedirect(getattr(settings, "SU_LOGIN_REDIRECT_URL", "/"))
 
 
 @csrf_protect
-@require_http_methods(['POST', 'GET'])
+@require_http_methods(["POST", "GET"])
 @user_passes_test(su_login_callback)
-def su_login(request, form_class=UserSuForm, template_name='su/login.html'):
+def su_login(request, form_class=UserSuForm, template_name="su/login.html"):
     form = form_class(request.POST or None)
     if form.is_valid():
         return login_as_user(request, form.get_user().pk)
 
-    return render(request, template_name, {
-        'form': form,
-    })
+    return render(
+        request,
+        template_name,
+        {
+            "form": form,
+        },
+    )
 
 
 def su_logout(request):
     exit_users_pk = request.session.get("exit_users_pk", default=[])
     if not exit_users_pk:
-        return HttpResponseBadRequest(
-            ("This session was not su'ed into. Cannot exit."))
+        return HttpResponseBadRequest(("This session was not su'ed into. Cannot exit."))
 
     user_id, backend = exit_users_pk.pop()
 
@@ -80,11 +83,10 @@ def su_logout(request):
         login(request, userobj)
     request.session["exit_users_pk"] = exit_users_pk
 
-    if hasattr(settings, 'SU_REDIRECT_EXIT'):
+    if hasattr(settings, "SU_REDIRECT_EXIT"):
         warnings.warn(
             "SU_REDIRECT_EXIT is deprecated, use SU_LOGOUT_REDIRECT_URL",
             DeprecationWarning,
         )
 
-    return HttpResponseRedirect(
-        getattr(settings, "SU_LOGOUT_REDIRECT_URL", "/"))
+    return HttpResponseRedirect(getattr(settings, "SU_LOGOUT_REDIRECT_URL", "/"))

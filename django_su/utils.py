@@ -8,22 +8,22 @@ from django.utils.module_loading import import_string
 
 
 def su_login_callback(user):
-    if hasattr(settings, 'SU_LOGIN'):
+    if hasattr(settings, "SU_LOGIN"):
         warnings.warn(
             "SU_LOGIN is deprecated, use SU_LOGIN_CALLBACK",
             DeprecationWarning,
         )
 
-    func = getattr(settings, 'SU_LOGIN_CALLBACK', None)
+    func = getattr(settings, "SU_LOGIN_CALLBACK", None)
     if func is not None:
         if not isinstance(func, Callable):
             func = import_string(func)
         return func(user)
-    return user.has_perm('auth.change_user')
+    return user.has_perm("auth.change_user")
 
 
 def custom_login_action(request, user):
-    func = getattr(settings, 'SU_CUSTOM_LOGIN_ACTION', None)
+    func = getattr(settings, "SU_CUSTOM_LOGIN_ACTION", None)
     if func is None:
         return False
 
