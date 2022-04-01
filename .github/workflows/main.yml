@@ -27,6 +27,12 @@ jobs:
         exclude:
           - DJANGO_VERSION: '4.0.*'
             python-version: '3.7'
+          - DJANGO_VERSION: '3.1.*'
+            python-version: '3.10'
+          - DJANGO_VERSION: '3.0.*'
+            python-version: '3.10'
+          - DJANGO_VERSION: '2.2.*'
+            python-version: '3.10'
       fail-fast: false
 
     services:
@@ -66,20 +72,15 @@ jobs:
            pip install psycopg2==2.8.6
            pip install codecov
 
-      - name: Testing
+      - name: Django 4.1 compatible version of ajax_selects
+        if: ${{ matrix.DJANGO_VERSION }} == '4.0'
         run: |
-          case "${{ matrix.DJANGO_VERSION }},${{ matrix.python-version }}" in
-            "2.2.*,3.10"|"3.0.*,3.10"|"3.1.*,3.10")  # Django runs with warnings in this python version
-              PYTHONPATH=`pwd` coverage run --source django_su ./example/manage.py test
-              ;;
-            *)
-              # Django 4.0 incompatibility in ajax_selects, remove this once https://github.com/crucialfelix/django-ajax-selects/pull/289 is merged:
+              # remove this once https://github.com/crucialfelix/django-ajax-selects/pull/289 is merged
               pip uninstall -y django-ajax-selects
               pip install git+https://github.com/andyzickler/django-ajax-selects@remove-default-app-config
-
-              PYTHONPATH=`pwd` python -W error::DeprecationWarning -m coverage run --source django_su ./example/manage.py test
-              ;;
-          esac
+      - name: Testing
+        run: |
+          PYTHONPATH=`pwd` python -W error::DeprecationWarning -m coverage run --source django_su ./example/manage.py test
           coverage xml && codecov
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost/postgres"
