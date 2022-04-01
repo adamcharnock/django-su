@@ -4,7 +4,7 @@ import warnings
 
 from django.conf import settings
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import get_user_model, login, authenticate, user_logged_in
+from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
