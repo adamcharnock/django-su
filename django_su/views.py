@@ -95,4 +95,8 @@ def su_logout(request):
             DeprecationWarning,
         )
 
+    custom_redirect_url = request.session.get("su_custom_redirect_url")
+    if custom_redirect_url:
+        return HttpResponseRedirect(custom_redirect_url)
+
     return HttpResponseRedirect(getattr(settings, "SU_LOGOUT_REDIRECT_URL", "/"))
