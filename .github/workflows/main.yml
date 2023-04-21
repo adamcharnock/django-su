@@ -77,12 +77,6 @@ jobs:
            pip install psycopg2==2.8.6
            pip install codecov
 
-      - name: Django 4.1 compatible version of ajax_selects
-        if: ${{ matrix.DJANGO_VERSION }} == '4.0'
-        run: |
-              # remove this once https://github.com/crucialfelix/django-ajax-selects/pull/289 is merged
-              pip uninstall -y django-ajax-selects
-              pip install git+https://github.com/andyzickler/django-ajax-selects@remove-default-app-config
       - name: Testing
         run: PYTHONPATH=`pwd` python -W error::DeprecationWarning -m coverage run --source django_su ./example/manage.py test
       - name: upload coverage
