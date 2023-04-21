@@ -10,7 +10,6 @@ from django_su import get_user_model
 
 @register("django_su")
 class UsersLookup(LookupChannel):
-
     model = get_user_model()
 
     def get_query(self, q, request):

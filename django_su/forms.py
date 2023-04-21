@@ -10,7 +10,6 @@ User = get_user_model()
 
 
 class UserSuForm(forms.Form):
-
     username_field = getattr(User, "USERNAME_FIELD", None)
 
     user = forms.ModelChoiceField(
