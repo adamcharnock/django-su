@@ -12,6 +12,7 @@ from django.contrib.auth import (
     login,
 )
 
+
 def su_in(request, user_id):
     '''
     Returns: a User Object or None
@@ -42,6 +43,7 @@ def su_in(request, user_id):
             userobj.save(update_fields=["last_login"])
 
         return userobj
+
 
 def su_login_callback(user):
     if hasattr(settings, "SU_LOGIN"):
