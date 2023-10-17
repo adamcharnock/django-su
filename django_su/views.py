@@ -3,10 +3,7 @@
 import warnings
 
 from django.conf import settings
-from django.contrib.auth import (
-    get_user_model,
-    login,
-)
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import user_passes_test
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render

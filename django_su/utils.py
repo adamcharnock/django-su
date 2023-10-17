@@ -4,19 +4,14 @@ import warnings
 from collections.abc import Callable
 
 from django.conf import settings
-from django.contrib.auth import (
-    BACKEND_SESSION_KEY,
-    SESSION_KEY,
-    authenticate,
-    login,
-)
+from django.contrib.auth import BACKEND_SESSION_KEY, SESSION_KEY, authenticate, login
 from django.utils.module_loading import import_string
 
 
 def su_in(request, user_id):
-    '''
+    """
     Returns: a User Object or None
-    '''
+    """
     if not request.user.has_perm("auth.change_user"):
         return None
 
