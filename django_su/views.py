@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 
 from .forms import UserSuForm
-from .utils import custom_login_action, su_login_callback, su_in
+from .utils import custom_login_action, su_in, su_login_callback
 
 
 User = get_user_model()
