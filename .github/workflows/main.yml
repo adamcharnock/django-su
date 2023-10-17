@@ -69,8 +69,8 @@ jobs:
         run: sudo apt-get install -y gettext
       - name: Install
         run: |
-           python setup.py develop
            pip install Django==${{ matrix.DJANGO_VERSION }}
+           python setup.py develop
            pip install -e .
            pip install -r requirements.test.txt
            pip install coveralls
