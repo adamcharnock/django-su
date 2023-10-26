@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.sessions.backends import cached_db
+from django.http import HttpRequest
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
@@ -60,10 +61,31 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(str(pk), str(self.authorized_user.pk))
         self.assertEqual(backend, "django.contrib.auth.backends.ModelBackend")
 
+    def test_login_success_without_custom_login_action(self):
+        """Ensure login works for a valid user when SU_CUSTOM_LOGIN_ACTION is None"""
+        self.client.login(username="authorized", password="pass")
+        with self.settings(SU_CUSTOM_LOGIN_ACTION=None):
+            response = self.client.post(
+                reverse("login_as_user", args=[self.destination_user.id])
+            )
+        self.assertEqual(response.status_code, 302)
+        # Check the user is logged in in the session
+        self.assertIn(auth.SESSION_KEY, self.client.session)
+        self.assertEqual(
+            str(self.client.session[auth.SESSION_KEY]), str(self.destination_user.id)
+        )
+        # Check the 'exit_users_pk' is set so we know which user to change back to
+        self.assertIn("exit_users_pk", self.client.session)
+        pk, backend = self.client.session["exit_users_pk"][0]
+        self.assertEqual(str(pk), str(self.authorized_user.pk))
+        self.assertEqual(backend, "django.contrib.auth.backends.ModelBackend")
+
     def test_login_user_id_invalid(self):
         """Ensure login fails with an invalid user id"""
         self.client.login(username="authorized", password="pass")
-        response = self.client.post("/su/abc/")
+        user_ids = User.objects.all().values_list("id", flat=True)
+        invalid_user_id = max(user_ids) + 1
+        response = self.client.post(reverse("login_as_user", args=[invalid_user_id]))
         self.assertEqual(response.status_code, 404)
         # User should still be logged in, but as the original user
         self.assertIn(auth.SESSION_KEY, self.client.session)
@@ -147,6 +169,30 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
             if "update_last_login" in str(ref[1])
         ]
         self.assertTrue(connections)
+
+
+class SuInUtilsTestCase(SuViewsBaseTestCase):
+    def test_su_in_no_perms(self):
+        """Ensure user must still have the auth.change_user permission when calling
+        su_in from user code"""
+        no_perms_user = self.user("noperms")
+        self.client.login(username="noperms", password="pass")
+
+        from ..utils import su_in
+
+        request = HttpRequest()
+        request.user = no_perms_user
+
+        result = su_in(request, no_perms_user)
+
+        self.assertEqual(result, None)
+        # User should still be logged in, but as the original user
+        self.assertIn(auth.SESSION_KEY, self.client.session)
+        self.assertEqual(
+            str(self.client.session[auth.SESSION_KEY]), str(no_perms_user.id)
+        )
+        # Exit user should never get set
+        self.assertNotIn("exit_users_pk", self.client.session)
 
 
 class LoginViewTestCase(SuViewsBaseTestCase):
