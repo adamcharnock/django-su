@@ -4,10 +4,10 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.sessions.backends import cached_db
+from django.http import HttpRequest
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
-from django.http import HttpRequest
 
 
 User = get_user_model()
@@ -83,11 +83,9 @@ class LoginAsUserViewTestCase(SuViewsBaseTestCase):
     def test_login_user_id_invalid(self):
         """Ensure login fails with an invalid user id"""
         self.client.login(username="authorized", password="pass")
-        user_ids = User.objects.all().values_list('id', flat=True)
+        user_ids = User.objects.all().values_list("id", flat=True)
         invalid_user_id = max(user_ids) + 1
-        response = self.client.post(
-            reverse("login_as_user", args=[invalid_user_id])
-        )
+        response = self.client.post(reverse("login_as_user", args=[invalid_user_id]))
         self.assertEqual(response.status_code, 404)
         # User should still be logged in, but as the original user
         self.assertIn(auth.SESSION_KEY, self.client.session)
