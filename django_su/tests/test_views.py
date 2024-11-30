@@ -1,10 +1,11 @@
 from datetime import date, timezone
+from unittest import mock
 
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.sessions.backends import cached_db
-from django.test import Client, TestCase
+from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
@@ -196,6 +197,18 @@ class LoginViewTestCase(SuViewsBaseTestCase):
         self.assertEqual(
             str(self.client.session[auth.SESSION_KEY]), str(self.authorized_user.id)
         )
+
+    @override_settings(SU_DAL_VIEW_NAME="sampleview")
+    def test_uses_autocomplete_form(self):
+        """Ensure the view uses the correct form instance when SU_DAL_VIEW_NAME is present"""
+        self.client.login(username="authorized", password="pass")
+
+        with mock.patch("django_su.views.UserSuDalForm") as dal_form:
+            dal_form.return_value.is_valid.return_value = False
+            response = self.client.get(reverse("su_login"))
+
+        dal_form.assert_called_once()
+        self.assertEqual(response.status_code, 200)
 
 
 class LogoutViewTestCase(SuViewsBaseTestCase):

@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 
-from .forms import UserSuForm
+from .forms import UserSuDalForm, UserSuForm
 from .utils import custom_login_action, su_login_callback
 
 
@@ -61,7 +61,13 @@ def login_as_user(request, user_id):
 @csrf_protect
 @require_http_methods(["POST", "GET"])
 @user_passes_test(su_login_callback)
-def su_login(request, form_class=UserSuForm, template_name="su/login.html"):
+def su_login(request, form_class=None, template_name="su/login.html"):
+    if form_class is None:
+        if getattr(settings, "SU_DAL_VIEW_NAME", None):
+            form_class = UserSuDalForm
+        else:
+            form_class = UserSuForm
+
     form = form_class(request.POST or None)
     if form.is_valid():
         return login_as_user(request, form.get_user().pk)

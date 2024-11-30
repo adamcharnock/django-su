@@ -1,3 +1,4 @@
 coveralls
 django-form-admin
 django-ajax-selects
+django-autocomplete-light
