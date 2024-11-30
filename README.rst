@@ -3,7 +3,7 @@ django-su
 
 Login as any user from the Django admin interface, then switch back when done
 
-Authored by `Adam Charnock <http://adamcharnock.com/>`_, and some great
+Authored by `Adam Charnock <http://adamcharnock.com/>`_ (who is available for freelance/contract work), and some great
 `contributors <https://github.com/adamcharnock/django-su/contributors>`_.
 
 .. image:: https://img.shields.io/pypi/v/django-su.svg
